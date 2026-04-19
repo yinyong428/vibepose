@@ -15,6 +15,7 @@
 		AA0000060000000000000001 /* PoseScoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000060000000000000001 /* PoseScoring.swift */; };
 		AA0000070000000000000001 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000070000000000000001 /* RecommendationService.swift */; };
 		AA0000080000000000000001 /* AutoCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000080000000000000001 /* AutoCaptureCoordinator.swift */; };
+		AA0000080000000000000002 /* CaptureResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000080000000000000002 /* CaptureResult.swift */; };
 		AA0000090000000000000001 /* VisionPoseDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000090000000000000001 /* VisionPoseDetector.swift */; };
 		AA00000A0000000000000001 /* CameraSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000A0000000000000001 /* CameraSessionController.swift */; };
 		AA00000B0000000000000001 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000B0000000000000001 /* MotionService.swift */; };
@@ -22,6 +23,7 @@
 		AA00000D0000000000000001 /* PhotoLibraryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000D0000000000000001 /* PhotoLibraryClient.swift */; };
 		AA00000E0000000000000001 /* TemplatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000E0000000000000001 /* TemplatePickerView.swift */; };
 		AA00000F0000000000000001 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000F0000000000000001 /* ResultView.swift */; };
+		AA00000F0000000000000002 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000F0000000000000002 /* ActivityView.swift */; };
 		AA0000100000000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000100000000000000001 /* SettingsView.swift */; };
 		AA0000110000000000000001 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000110000000000000001 /* CameraPreviewView.swift */; };
 		AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000120000000000000001 /* CameraGuidanceViewModel.swift */; };
@@ -40,6 +42,7 @@
 		AA1000060000000000000001 /* PoseScoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseScoring.swift; sourceTree = "<group>"; };
 		AA1000070000000000000001 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
 		AA1000080000000000000001 /* AutoCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoordinator.swift; sourceTree = "<group>"; };
+		AA1000080000000000000002 /* CaptureResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureResult.swift; sourceTree = "<group>"; };
 		AA1000090000000000000001 /* VisionPoseDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionPoseDetector.swift; sourceTree = "<group>"; };
 		AA10000A0000000000000001 /* CameraSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionController.swift; sourceTree = "<group>"; };
 		AA10000B0000000000000001 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		AA10000D0000000000000001 /* PhotoLibraryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryClient.swift; sourceTree = "<group>"; };
 		AA10000E0000000000000001 /* TemplatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePickerView.swift; sourceTree = "<group>"; };
 		AA10000F0000000000000001 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		AA10000F0000000000000002 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		AA1000100000000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1000110000000000000001 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 		AA1000120000000000000001 /* CameraGuidanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 		AA50000E0000000000000001 /* ResultFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AA10000F0000000000000002 /* ActivityView.swift */,
 				AA10000F0000000000000001 /* ResultView.swift */,
 			);
 			path = ResultFlow;
@@ -216,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1000080000000000000001 /* AutoCaptureCoordinator.swift */,
+				AA1000080000000000000002 /* CaptureResult.swift */,
 			);
 			path = Capture;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 				AA0000060000000000000001 /* PoseScoring.swift in Sources */,
 				AA0000070000000000000001 /* RecommendationService.swift in Sources */,
 				AA0000080000000000000001 /* AutoCaptureCoordinator.swift in Sources */,
+				AA0000080000000000000002 /* CaptureResult.swift in Sources */,
 				AA0000090000000000000001 /* VisionPoseDetector.swift in Sources */,
 				AA00000A0000000000000001 /* CameraSessionController.swift in Sources */,
 				AA00000B0000000000000001 /* MotionService.swift in Sources */,
@@ -354,6 +361,7 @@
 				AA00000D0000000000000001 /* PhotoLibraryClient.swift in Sources */,
 				AA00000E0000000000000001 /* TemplatePickerView.swift in Sources */,
 				AA00000F0000000000000001 /* ResultView.swift in Sources */,
+				AA00000F0000000000000002 /* ActivityView.swift in Sources */,
 				AA0000100000000000000001 /* SettingsView.swift in Sources */,
 				AA0000110000000000000001 /* CameraPreviewView.swift in Sources */,
 				AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */,

@@ -26,5 +26,16 @@
 "template.unknown" = "未选择模板";
 "result.title" = "Spike 结果页";
 "result.score %d" = "当前得分：%d";
-"result.note" = "这里先作为结果页占位，后续接保存、分享和复拍闭环。";
-
+"result.score_label %d" = "匹配得分：%d";
+"result.note" = "当前结果来自最新实时视频帧，用来验证保存、分享和重拍闭环。";
+"result.trigger_auto" = "自动快门触发";
+"result.trigger_manual" = "手动拍摄触发";
+"result.representation_photo" = "来源：正式拍照";
+"result.representation_fallback" = "来源：实时帧回退";
+"result.save" = "保存到相册";
+"result.saved" = "已保存";
+"result.save_failed_title" = "保存失败";
+"result.save_failed_message" = "无法将这张照片保存到系统相册。";
+"result.dismiss" = "知道了";
+"result.share" = "分享";
+"result.retake" = "重拍";
