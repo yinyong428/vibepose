@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000010000000000000001 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000010000000000000001 /* AppConfig.swift */; };
+		AA0000020000000000000001 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000020000000000000001 /* DependencyContainer.swift */; };
+		AA0000030000000000000001 /* VibePoseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000030000000000000001 /* VibePoseApp.swift */; };
+		AA0000040000000000000001 /* CanonicalPose.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000040000000000000001 /* CanonicalPose.swift */; };
+		AA0000050000000000000001 /* PoseTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000050000000000000001 /* PoseTemplate.swift */; };
+		AA0000060000000000000001 /* PoseScoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000060000000000000001 /* PoseScoring.swift */; };
+		AA0000070000000000000001 /* RecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000070000000000000001 /* RecommendationService.swift */; };
+		AA0000080000000000000001 /* AutoCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000080000000000000001 /* AutoCaptureCoordinator.swift */; };
+		AA0000090000000000000001 /* VisionPoseDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000090000000000000001 /* VisionPoseDetector.swift */; };
+		AA00000A0000000000000001 /* CameraSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000A0000000000000001 /* CameraSessionController.swift */; };
+		AA00000B0000000000000001 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000B0000000000000001 /* MotionService.swift */; };
+		AA00000C0000000000000001 /* TemplateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000C0000000000000001 /* TemplateRepository.swift */; };
+		AA00000D0000000000000001 /* PhotoLibraryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000D0000000000000001 /* PhotoLibraryClient.swift */; };
+		AA00000E0000000000000001 /* TemplatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000E0000000000000001 /* TemplatePickerView.swift */; };
+		AA00000F0000000000000001 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000F0000000000000001 /* ResultView.swift */; };
+		AA0000100000000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000100000000000000001 /* SettingsView.swift */; };
+		AA0000110000000000000001 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000110000000000000001 /* CameraPreviewView.swift */; };
+		AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000120000000000000001 /* CameraGuidanceViewModel.swift */; };
+		AA0000130000000000000001 /* CameraGuidanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000130000000000000001 /* CameraGuidanceView.swift */; };
+		AA0000140000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1000140000000000000001 /* Assets.xcassets */; };
+		AA0000150000000000000001 /* starter_pack.json in Resources */ = {isa = PBXBuildFile; fileRef = AA1000150000000000000001 /* starter_pack.json */; };
+		AA0000160000000000000001 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA3000010000000000000001 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA1000010000000000000001 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		AA1000020000000000000001 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		AA1000030000000000000001 /* VibePoseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibePoseApp.swift; sourceTree = "<group>"; };
+		AA1000040000000000000001 /* CanonicalPose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonicalPose.swift; sourceTree = "<group>"; };
+		AA1000050000000000000001 /* PoseTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseTemplate.swift; sourceTree = "<group>"; };
+		AA1000060000000000000001 /* PoseScoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseScoring.swift; sourceTree = "<group>"; };
+		AA1000070000000000000001 /* RecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationService.swift; sourceTree = "<group>"; };
+		AA1000080000000000000001 /* AutoCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoordinator.swift; sourceTree = "<group>"; };
+		AA1000090000000000000001 /* VisionPoseDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionPoseDetector.swift; sourceTree = "<group>"; };
+		AA10000A0000000000000001 /* CameraSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionController.swift; sourceTree = "<group>"; };
+		AA10000B0000000000000001 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
+		AA10000C0000000000000001 /* TemplateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRepository.swift; sourceTree = "<group>"; };
+		AA10000D0000000000000001 /* PhotoLibraryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryClient.swift; sourceTree = "<group>"; };
+		AA10000E0000000000000001 /* TemplatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePickerView.swift; sourceTree = "<group>"; };
+		AA10000F0000000000000001 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		AA1000100000000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA1000110000000000000001 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		AA1000120000000000000001 /* CameraGuidanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceViewModel.swift; sourceTree = "<group>"; };
+		AA1000130000000000000001 /* CameraGuidanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceView.swift; sourceTree = "<group>"; };
+		AA1000140000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA1000150000000000000001 /* starter_pack.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = starter_pack.json; sourceTree = "<group>"; };
+		AA1000160000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA1000170000000000000001 /* VibePose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibePose.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2000010000000000000001 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA2000020000000000000001 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = zh-Hans.lproj/Localizable.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA4000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA5000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				AA5000020000000000000001 /* VibePose */,
+				AA50000B0000000000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA5000020000000000000001 /* VibePose */ = {
+			isa = PBXGroup;
+			children = (
+				AA5000030000000000000001 /* App */,
+				AA5000040000000000000001 /* Features */,
+				AA5000050000000000000001 /* Domain */,
+				AA5000060000000000000001 /* Infra */,
+				AA5000070000000000000001 /* Resources */,
+				AA1000160000000000000001 /* Info.plist */,
+			);
+			path = VibePose;
+			sourceTree = "<group>";
+		};
+		AA5000030000000000000001 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000010000000000000001 /* AppConfig.swift */,
+				AA1000020000000000000001 /* DependencyContainer.swift */,
+				AA1000030000000000000001 /* VibePoseApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA5000040000000000000001 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AA50000C0000000000000001 /* CameraGuidance */,
+				AA50000D0000000000000001 /* TemplatePicker */,
+				AA50000E0000000000000001 /* ResultFlow */,
+				AA50000F0000000000000001 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AA5000050000000000000001 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AA5000100000000000000001 /* Pose */,
+				AA5000110000000000000001 /* Matching */,
+				AA5000120000000000000001 /* Recommendation */,
+				AA5000130000000000000001 /* Capture */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AA5000060000000000000001 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				AA5000140000000000000001 /* Vision */,
+				AA5000150000000000000001 /* Camera */,
+				AA5000160000000000000001 /* Motion */,
+				AA5000170000000000000001 /* Persistence */,
+				AA5000180000000000000001 /* Photos */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		AA5000070000000000000001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000140000000000000001 /* Assets.xcassets */,
+				AA1000150000000000000001 /* starter_pack.json */,
+				AA5000190000000000000001 /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA50000B0000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000170000000000000001 /* VibePose.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA50000C0000000000000001 /* CameraGuidance */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000110000000000000001 /* CameraPreviewView.swift */,
+				AA1000120000000000000001 /* CameraGuidanceViewModel.swift */,
+				AA1000130000000000000001 /* CameraGuidanceView.swift */,
+			);
+			path = CameraGuidance;
+			sourceTree = "<group>";
+		};
+		AA50000D0000000000000001 /* TemplatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000E0000000000000001 /* TemplatePickerView.swift */,
+			);
+			path = TemplatePicker;
+			sourceTree = "<group>";
+		};
+		AA50000E0000000000000001 /* ResultFlow */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000F0000000000000001 /* ResultView.swift */,
+			);
+			path = ResultFlow;
+			sourceTree = "<group>";
+		};
+		AA50000F0000000000000001 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000100000000000000001 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		AA5000100000000000000001 /* Pose */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000040000000000000001 /* CanonicalPose.swift */,
+				AA1000050000000000000001 /* PoseTemplate.swift */,
+			);
+			path = Pose;
+			sourceTree = "<group>";
+		};
+		AA5000110000000000000001 /* Matching */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000060000000000000001 /* PoseScoring.swift */,
+			);
+			path = Matching;
+			sourceTree = "<group>";
+		};
+		AA5000120000000000000001 /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000070000000000000001 /* RecommendationService.swift */,
+			);
+			path = Recommendation;
+			sourceTree = "<group>";
+		};
+		AA5000130000000000000001 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000080000000000000001 /* AutoCaptureCoordinator.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		AA5000140000000000000001 /* Vision */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000090000000000000001 /* VisionPoseDetector.swift */,
+			);
+			path = Vision;
+			sourceTree = "<group>";
+		};
+		AA5000150000000000000001 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000A0000000000000001 /* CameraSessionController.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		AA5000160000000000000001 /* Motion */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000B0000000000000001 /* MotionService.swift */,
+			);
+			path = Motion;
+			sourceTree = "<group>";
+		};
+		AA5000170000000000000001 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000C0000000000000001 /* TemplateRepository.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		AA5000180000000000000001 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000D0000000000000001 /* PhotoLibraryClient.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		AA5000190000000000000001 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000010000000000000001 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA6000010000000000000001 /* VibePose */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA7000020000000000000001 /* Build configuration list for PBXNativeTarget "VibePose" */;
+			buildPhases = (
+				AA4000020000000000000001 /* Sources */,
+				AA4000010000000000000001 /* Frameworks */,
+				AA4000030000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VibePose;
+			productName = VibePose;
+			productReference = AA1000170000000000000001 /* VibePose.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA7000010000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					AA6000010000000000000001 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+				};
+			};
+			buildConfigurationList = AA7000010000000000000002 /* Build configuration list for PBXProject "VibePose" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+			);
+			mainGroup = AA5000010000000000000001;
+			productRefGroup = AA50000B0000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA6000010000000000000001 /* VibePose */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA4000030000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000140000000000000001 /* Assets.xcassets in Resources */,
+				AA0000150000000000000001 /* starter_pack.json in Resources */,
+				AA0000160000000000000001 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA4000020000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000010000000000000001 /* AppConfig.swift in Sources */,
+				AA0000020000000000000001 /* DependencyContainer.swift in Sources */,
+				AA0000030000000000000001 /* VibePoseApp.swift in Sources */,
+				AA0000040000000000000001 /* CanonicalPose.swift in Sources */,
+				AA0000050000000000000001 /* PoseTemplate.swift in Sources */,
+				AA0000060000000000000001 /* PoseScoring.swift in Sources */,
+				AA0000070000000000000001 /* RecommendationService.swift in Sources */,
+				AA0000080000000000000001 /* AutoCaptureCoordinator.swift in Sources */,
+				AA0000090000000000000001 /* VisionPoseDetector.swift in Sources */,
+				AA00000A0000000000000001 /* CameraSessionController.swift in Sources */,
+				AA00000B0000000000000001 /* MotionService.swift in Sources */,
+				AA00000C0000000000000001 /* TemplateRepository.swift in Sources */,
+				AA00000D0000000000000001 /* PhotoLibraryClient.swift in Sources */,
+				AA00000E0000000000000001 /* TemplatePickerView.swift in Sources */,
+				AA00000F0000000000000001 /* ResultView.swift in Sources */,
+				AA0000100000000000000001 /* SettingsView.swift in Sources */,
+				AA0000110000000000000001 /* CameraPreviewView.swift in Sources */,
+				AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */,
+				AA0000130000000000000001 /* CameraGuidanceView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AA3000010000000000000001 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA2000010000000000000001 /* en */,
+				AA2000020000000000000001 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA8000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA8000020000000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		AA8000030000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = VibePose/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.vibepose;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AA8000040000000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = VibePose/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.vibepose;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA7000010000000000000002 /* Build configuration list for PBXProject "VibePose" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA8000010000000000000001 /* Debug */,
+				AA8000020000000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA7000020000000000000001 /* Build configuration list for PBXNativeTarget "VibePose" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA8000030000000000000001 /* Debug */,
+				AA8000040000000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA7000010000000000000001 /* Project object */;
+}

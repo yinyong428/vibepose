@@ -1,0 +1,181 @@
+[
+  {
+    "templateId": "vp_street_full_body_alpha_001",
+    "version": "1.0.0",
+    "status": "released",
+    "displayNameKey": "template.street_alpha.name",
+    "subtitleKey": "template.street_alpha.subtitle",
+    "sceneTags": ["street"],
+    "styleTags": ["alpha", "travel"],
+    "effectTags": ["look_taller", "power_pose"],
+    "framing": "full_body",
+    "subjectCount": 1,
+    "difficulty": "easy",
+    "cameraFacing": ["back", "front"],
+    "mirrorPolicy": "auto_by_camera",
+    "pose": {
+      "points": {
+        "nose": { "joint": "nose", "x": 0.50, "y": 0.20, "confidence": 1.0 },
+        "neck": { "joint": "neck", "x": 0.50, "y": 0.29, "confidence": 1.0 },
+        "leftShoulder": { "joint": "leftShoulder", "x": 0.42, "y": 0.29, "confidence": 1.0 },
+        "rightShoulder": { "joint": "rightShoulder", "x": 0.58, "y": 0.29, "confidence": 1.0 },
+        "leftElbow": { "joint": "leftElbow", "x": 0.38, "y": 0.42, "confidence": 1.0 },
+        "rightElbow": { "joint": "rightElbow", "x": 0.63, "y": 0.39, "confidence": 1.0 },
+        "leftWrist": { "joint": "leftWrist", "x": 0.34, "y": 0.50, "confidence": 1.0 },
+        "rightWrist": { "joint": "rightWrist", "x": 0.68, "y": 0.33, "confidence": 1.0 },
+        "leftHip": { "joint": "leftHip", "x": 0.46, "y": 0.50, "confidence": 1.0 },
+        "rightHip": { "joint": "rightHip", "x": 0.56, "y": 0.50, "confidence": 1.0 },
+        "leftKnee": { "joint": "leftKnee", "x": 0.45, "y": 0.70, "confidence": 1.0 },
+        "rightKnee": { "joint": "rightKnee", "x": 0.58, "y": 0.68, "confidence": 1.0 },
+        "leftAnkle": { "joint": "leftAnkle", "x": 0.43, "y": 0.92, "confidence": 1.0 },
+        "rightAnkle": { "joint": "rightAnkle", "x": 0.60, "y": 0.90, "confidence": 1.0 },
+        "leftEye": { "joint": "leftEye", "x": 0.47, "y": 0.18, "confidence": 1.0 },
+        "rightEye": { "joint": "rightEye", "x": 0.53, "y": 0.18, "confidence": 1.0 },
+        "leftEar": { "joint": "leftEar", "x": 0.44, "y": 0.20, "confidence": 1.0 },
+        "rightEar": { "joint": "rightEar", "x": 0.56, "y": 0.20, "confidence": 1.0 },
+        "pelvis": { "joint": "pelvis", "x": 0.51, "y": 0.50, "confidence": 1.0 }
+      },
+      "coverage": 1.0,
+      "source": "syntheticTemplate",
+      "mirrorMode": "allow"
+    },
+    "matching": {
+      "readyThreshold": 0.72,
+      "perfectThreshold": 0.86,
+      "holdDuration": 1.5,
+      "jointWeights": {
+        "leftShoulder": 1.2,
+        "rightShoulder": 1.2,
+        "leftHip": 1.1,
+        "rightHip": 1.1,
+        "leftWrist": 1.0,
+        "rightWrist": 1.0
+      }
+    },
+    "guide": {
+      "coachKey": "template.street_alpha.coach",
+      "photographerKey": "template.street_alpha.photographer",
+      "framingKey": "template.street_alpha.framing",
+      "preferredCamera": "back"
+    }
+  },
+  {
+    "templateId": "vp_cafe_half_body_relaxed_012",
+    "version": "1.0.0",
+    "status": "released",
+    "displayNameKey": "template.cafe_relaxed.name",
+    "subtitleKey": "template.cafe_relaxed.subtitle",
+    "sceneTags": ["cafe", "indoor"],
+    "styleTags": ["relaxed", "chic"],
+    "effectTags": ["relaxed", "slimmer_face"],
+    "framing": "half_body",
+    "subjectCount": 1,
+    "difficulty": "easy",
+    "cameraFacing": ["back", "front"],
+    "mirrorPolicy": "auto_by_camera",
+    "pose": {
+      "points": {
+        "nose": { "joint": "nose", "x": 0.53, "y": 0.23, "confidence": 1.0 },
+        "neck": { "joint": "neck", "x": 0.52, "y": 0.31, "confidence": 1.0 },
+        "leftShoulder": { "joint": "leftShoulder", "x": 0.44, "y": 0.32, "confidence": 1.0 },
+        "rightShoulder": { "joint": "rightShoulder", "x": 0.60, "y": 0.30, "confidence": 1.0 },
+        "leftElbow": { "joint": "leftElbow", "x": 0.42, "y": 0.44, "confidence": 1.0 },
+        "rightElbow": { "joint": "rightElbow", "x": 0.61, "y": 0.41, "confidence": 1.0 },
+        "leftWrist": { "joint": "leftWrist", "x": 0.49, "y": 0.43, "confidence": 1.0 },
+        "rightWrist": { "joint": "rightWrist", "x": 0.67, "y": 0.44, "confidence": 1.0 },
+        "leftHip": { "joint": "leftHip", "x": 0.47, "y": 0.54, "confidence": 1.0 },
+        "rightHip": { "joint": "rightHip", "x": 0.56, "y": 0.52, "confidence": 1.0 },
+        "leftKnee": { "joint": "leftKnee", "x": 0.48, "y": 0.74, "confidence": 1.0 },
+        "rightKnee": { "joint": "rightKnee", "x": 0.57, "y": 0.73, "confidence": 1.0 },
+        "leftAnkle": { "joint": "leftAnkle", "x": 0.49, "y": 0.92, "confidence": 1.0 },
+        "rightAnkle": { "joint": "rightAnkle", "x": 0.58, "y": 0.91, "confidence": 1.0 },
+        "leftEye": { "joint": "leftEye", "x": 0.50, "y": 0.20, "confidence": 1.0 },
+        "rightEye": { "joint": "rightEye", "x": 0.55, "y": 0.20, "confidence": 1.0 },
+        "leftEar": { "joint": "leftEar", "x": 0.47, "y": 0.22, "confidence": 1.0 },
+        "rightEar": { "joint": "rightEar", "x": 0.58, "y": 0.22, "confidence": 1.0 },
+        "pelvis": { "joint": "pelvis", "x": 0.52, "y": 0.53, "confidence": 1.0 }
+      },
+      "coverage": 1.0,
+      "source": "syntheticTemplate",
+      "mirrorMode": "allow"
+    },
+    "matching": {
+      "readyThreshold": 0.70,
+      "perfectThreshold": 0.84,
+      "holdDuration": 1.5,
+      "jointWeights": {
+        "leftShoulder": 1.1,
+        "rightShoulder": 1.1,
+        "leftWrist": 1.3,
+        "rightWrist": 1.1,
+        "nose": 0.9
+      }
+    },
+    "guide": {
+      "coachKey": "template.cafe_relaxed.coach",
+      "photographerKey": "template.cafe_relaxed.photographer",
+      "framingKey": "template.cafe_relaxed.framing",
+      "preferredCamera": "front"
+    }
+  },
+  {
+    "templateId": "vp_travel_selfie_city_021",
+    "version": "1.0.0",
+    "status": "released",
+    "displayNameKey": "template.selfie_city.name",
+    "subtitleKey": "template.selfie_city.subtitle",
+    "sceneTags": ["citynight", "travel"],
+    "styleTags": ["travel", "casual"],
+    "effectTags": ["relaxed", "selfie_ready"],
+    "framing": "half_body",
+    "subjectCount": 1,
+    "difficulty": "medium",
+    "cameraFacing": ["front"],
+    "mirrorPolicy": "auto_by_camera",
+    "pose": {
+      "points": {
+        "nose": { "joint": "nose", "x": 0.47, "y": 0.22, "confidence": 1.0 },
+        "neck": { "joint": "neck", "x": 0.48, "y": 0.30, "confidence": 1.0 },
+        "leftShoulder": { "joint": "leftShoulder", "x": 0.42, "y": 0.32, "confidence": 1.0 },
+        "rightShoulder": { "joint": "rightShoulder", "x": 0.56, "y": 0.29, "confidence": 1.0 },
+        "leftElbow": { "joint": "leftElbow", "x": 0.38, "y": 0.43, "confidence": 1.0 },
+        "rightElbow": { "joint": "rightElbow", "x": 0.65, "y": 0.28, "confidence": 1.0 },
+        "leftWrist": { "joint": "leftWrist", "x": 0.43, "y": 0.51, "confidence": 1.0 },
+        "rightWrist": { "joint": "rightWrist", "x": 0.76, "y": 0.20, "confidence": 1.0 },
+        "leftHip": { "joint": "leftHip", "x": 0.45, "y": 0.53, "confidence": 1.0 },
+        "rightHip": { "joint": "rightHip", "x": 0.54, "y": 0.51, "confidence": 1.0 },
+        "leftKnee": { "joint": "leftKnee", "x": 0.43, "y": 0.73, "confidence": 1.0 },
+        "rightKnee": { "joint": "rightKnee", "x": 0.56, "y": 0.72, "confidence": 1.0 },
+        "leftAnkle": { "joint": "leftAnkle", "x": 0.42, "y": 0.92, "confidence": 1.0 },
+        "rightAnkle": { "joint": "rightAnkle", "x": 0.58, "y": 0.91, "confidence": 1.0 },
+        "leftEye": { "joint": "leftEye", "x": 0.45, "y": 0.19, "confidence": 1.0 },
+        "rightEye": { "joint": "rightEye", "x": 0.50, "y": 0.19, "confidence": 1.0 },
+        "leftEar": { "joint": "leftEar", "x": 0.42, "y": 0.21, "confidence": 1.0 },
+        "rightEar": { "joint": "rightEar", "x": 0.53, "y": 0.21, "confidence": 1.0 },
+        "pelvis": { "joint": "pelvis", "x": 0.50, "y": 0.52, "confidence": 1.0 }
+      },
+      "coverage": 1.0,
+      "source": "syntheticTemplate",
+      "mirrorMode": "allow"
+    },
+    "matching": {
+      "readyThreshold": 0.69,
+      "perfectThreshold": 0.83,
+      "holdDuration": 1.2,
+      "jointWeights": {
+        "rightWrist": 1.4,
+        "rightElbow": 1.2,
+        "nose": 1.0,
+        "leftShoulder": 0.9,
+        "rightShoulder": 1.1
+      }
+    },
+    "guide": {
+      "coachKey": "template.selfie_city.coach",
+      "photographerKey": "template.selfie_city.photographer",
+      "framingKey": "template.selfie_city.framing",
+      "preferredCamera": "front"
+    }
+  }
+]
+
