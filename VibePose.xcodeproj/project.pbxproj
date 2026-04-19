@@ -31,7 +31,19 @@
 		AA0000140000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1000140000000000000001 /* Assets.xcassets */; };
 		AA0000150000000000000001 /* starter_pack.json in Resources */ = {isa = PBXBuildFile; fileRef = AA1000150000000000000001 /* starter_pack.json */; };
 		AA0000160000000000000001 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA3000010000000000000001 /* Localizable.strings */; };
+		AB0000010000000000000001 /* AutoCaptureCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1000010000000000000001 /* AutoCaptureCoordinatorTests.swift */; };
+		AB0000020000000000000001 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1000020000000000000001 /* XCTest.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AB2000010000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA7000010000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA6000010000000000000001;
+			remoteInfo = VibePose;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AA1000010000000000000001 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -61,6 +73,9 @@
 		AA1000170000000000000001 /* VibePose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibePose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2000010000000000000001 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA2000020000000000000001 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = zh-Hans.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AB1000010000000000000001 /* AutoCaptureCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoordinatorTests.swift; sourceTree = "<group>"; };
+		AB1000020000000000000001 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		AB1000030000000000000001 /* VibePoseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VibePoseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +86,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AB4000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB0000020000000000000001 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				AA5000020000000000000001 /* VibePose */,
+				AB5000010000000000000001 /* VibePoseTests */,
 				AA50000B0000000000000001 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1000170000000000000001 /* VibePose.app */,
+				AB1000030000000000000001 /* VibePoseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,6 +299,22 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		AB5000010000000000000001 /* VibePoseTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB5000020000000000000001 /* Capture */,
+			);
+			path = VibePoseTests;
+			sourceTree = "<group>";
+		};
+		AB5000020000000000000001 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				AB1000010000000000000001 /* AutoCaptureCoordinatorTests.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -294,6 +335,24 @@
 			productReference = AA1000170000000000000001 /* VibePose.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AB6000010000000000000001 /* VibePoseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB7000020000000000000001 /* Build configuration list for PBXNativeTarget "VibePoseTests" */;
+			buildPhases = (
+				AB4000020000000000000001 /* Sources */,
+				AB4000010000000000000001 /* Frameworks */,
+				AB4000030000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB3000010000000000000001 /* PBXTargetDependency */,
+			);
+			name = VibePoseTests;
+			productName = VibePoseTests;
+			productReference = AB1000030000000000000001 /* VibePoseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -306,6 +365,10 @@
 				TargetAttributes = {
 					AA6000010000000000000001 = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					AB6000010000000000000001 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = AA6000010000000000000001;
 					};
 				};
 			};
@@ -323,6 +386,7 @@
 			projectRoot = "";
 			targets = (
 				AA6000010000000000000001 /* VibePose */,
+				AB6000010000000000000001 /* VibePoseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -335,6 +399,13 @@
 				AA0000140000000000000001 /* Assets.xcassets in Resources */,
 				AA0000150000000000000001 /* starter_pack.json in Resources */,
 				AA0000160000000000000001 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB4000030000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +440,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AB4000020000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB0000010000000000000001 /* AutoCaptureCoordinatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AB3000010000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA6000010000000000000001 /* VibePose */;
+			targetProxy = AB2000010000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AA3000010000000000000001 /* Localizable.strings */ = {
@@ -466,6 +553,51 @@
 			};
 			name = Release;
 		};
+		AB8000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.vibeposeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VibePose.app/VibePose";
+			};
+			name = Debug;
+		};
+		AB8000020000000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.codex.vibeposeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VibePose.app/VibePose";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -483,6 +615,15 @@
 			buildConfigurations = (
 				AA8000030000000000000001 /* Debug */,
 				AA8000040000000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB7000020000000000000001 /* Build configuration list for PBXNativeTarget "VibePoseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB8000010000000000000001 /* Debug */,
+				AB8000020000000000000001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
