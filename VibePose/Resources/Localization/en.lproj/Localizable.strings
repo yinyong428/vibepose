@@ -26,5 +26,16 @@
 "template.unknown" = "No Template";
 "result.title" = "Spike Result";
 "result.score %d" = "Current score: %d";
-"result.note" = "This screen is a placeholder for the save/share/result flow.";
-
+"result.score_label %d" = "Match score: %d";
+"result.note" = "This result is captured from the latest live camera frame to validate the save/share/retake loop.";
+"result.trigger_auto" = "Captured automatically";
+"result.trigger_manual" = "Captured manually";
+"result.representation_photo" = "Source: still photo capture";
+"result.representation_fallback" = "Source: live frame fallback";
+"result.save" = "Save to Photos";
+"result.saved" = "Saved";
+"result.save_failed_title" = "Save Failed";
+"result.save_failed_message" = "Unable to save this photo to the photo library.";
+"result.dismiss" = "OK";
+"result.share" = "Share";
+"result.retake" = "Retake";

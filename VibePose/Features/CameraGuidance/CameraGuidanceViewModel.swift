@@ -14,11 +14,12 @@ final class CameraGuidanceViewModel: ObservableObject {
     @Published var pitchText = "0.00"
     @Published var cameraAuthorized = false
     @Published var showsSettings = false
-    @Published var showsResult = false
+    @Published var captureResult: CaptureResult?
 
     let cameraController: CameraSessionController
 
     private let container: DependencyContainer
+    private var captureInFlight = false
 
     init(container: DependencyContainer) {
         self.container = container
@@ -53,7 +54,29 @@ final class CameraGuidanceViewModel: ObservableObject {
     }
 
     func captureManual() {
-        showsResult = true
+        Task {
+            await captureStillPhoto(trigger: .manual)
+        }
+    }
+
+    func dismissResult() {
+        captureResult = nil
+        autoCaptureState = .idle
+        coachCopy = "coach.idle"
+        Task {
+            await container.autoCaptureCoordinator.reset()
+        }
+    }
+
+    func saveCurrentResult() async -> Bool {
+        guard let image = captureResult?.image else { return false }
+
+        do {
+            try await container.photoLibraryClient.save(image: image)
+            return true
+        } catch {
+            return false
+        }
     }
 
     private func bindCameraFrames() {
@@ -81,6 +104,8 @@ final class CameraGuidanceViewModel: ObservableObject {
     }
 
     private func process(sampleBuffer: CMSampleBuffer) async {
+        guard captureResult == nil else { return }
+
         let mirrored = cameraController.currentPosition == .front
         let pose = await container.visionPoseDetector.detectPose(in: sampleBuffer, mirrored: mirrored)
         detectedPose = pose
@@ -94,13 +119,38 @@ final class CameraGuidanceViewModel: ObservableObject {
             templates: templates
         )
 
-        autoCaptureState = await container.autoCaptureCoordinator.evaluate(
+        let decision = await container.autoCaptureCoordinator.evaluate(
             score: score,
             target: selectedTemplate,
             autoCaptureEnabled: featureFlags.autoCaptureEnabled,
             timestamp: ProcessInfo.processInfo.systemUptime
         )
+        autoCaptureState = decision.state
         coachCopy = coachKey(for: autoCaptureState)
+
+        if decision.shouldTriggerCapture {
+            await captureStillPhoto(trigger: .automatic)
+        }
+    }
+
+    private func captureStillPhoto(trigger: CaptureTrigger) async {
+        guard !captureInFlight else { return }
+        captureInFlight = true
+        defer { captureInFlight = false }
+
+        let stillImage = await cameraController.capturePhoto()
+        let fallbackImage = stillImage == nil ? await cameraController.captureLatestFrame() : nil
+        guard let image = stillImage ?? fallbackImage else { return }
+
+        captureResult = CaptureResult(
+            image: image,
+            templateDisplayNameKey: selectedTemplate?.displayNameKey ?? "template.unknown",
+            score: poseScore.value,
+            trigger: trigger,
+            representation: stillImage != nil ? .stillPhoto : .liveFrameFallback,
+            capturedAt: .now
+        )
+        await container.autoCaptureCoordinator.reset()
     }
 
     private func coachKey(for state: AutoCaptureState) -> String {

@@ -2,6 +2,9 @@ import SwiftUI
 
 struct CameraGuidanceView: View {
     @StateObject var viewModel: CameraGuidanceViewModel
+    #if DEBUG
+    @State private var showsDebugPanel = false
+    #endif
 
     var body: some View {
         ZStack {
@@ -38,20 +41,35 @@ struct CameraGuidanceView: View {
                 }
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    viewModel.toggleCamera()
-                } label: {
-                    Image(systemName: "camera.rotate")
+                HStack {
+                    #if DEBUG
+                    Button {
+                        showsDebugPanel.toggle()
+                    } label: {
+                        Image(systemName: "ladybug")
+                    }
+                    #endif
+
+                    Button {
+                        viewModel.toggleCamera()
+                    } label: {
+                        Image(systemName: "camera.rotate")
+                    }
                 }
             }
         }
         .sheet(isPresented: $viewModel.showsSettings) {
             SettingsView(featureFlags: $viewModel.featureFlags)
         }
-        .sheet(isPresented: $viewModel.showsResult) {
+        .sheet(item: $viewModel.captureResult) { result in
             ResultView(
-                score: viewModel.poseScore.value,
-                templateName: LocalizedStringKey(viewModel.selectedTemplate?.displayNameKey ?? "template.unknown")
+                result: result,
+                onSave: {
+                    await viewModel.saveCurrentResult()
+                },
+                onRetake: {
+                    viewModel.dismissResult()
+                }
             )
         }
         .onAppear { viewModel.onAppear() }
@@ -61,6 +79,11 @@ struct CameraGuidanceView: View {
     private var overlay: some View {
         VStack(spacing: 0) {
             coachBar
+            #if DEBUG
+            if showsDebugPanel {
+                debugPanel
+            }
+            #endif
             Spacer()
             poseCanvas
             Spacer()
@@ -84,6 +107,49 @@ struct CameraGuidanceView: View {
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
         .padding()
     }
+
+    #if DEBUG
+    private var debugPanel: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("DEBUG")
+                .font(.caption.bold())
+                .foregroundStyle(.yellow)
+
+            Group {
+                Text("camera: \(viewModel.cameraController.currentPosition == .front ? "front" : "back")")
+                Text("template: \(viewModel.selectedTemplate?.templateId ?? "none")")
+                Text("score: \(Int(viewModel.poseScore.value * 100))")
+                Text("coverage: \(String(format: "%.2f", viewModel.detectedPose?.coverage ?? 0))")
+                Text("state: \(debugAutoState)")
+                Text("capture result: \(viewModel.captureResult?.representation.rawValue ?? "none")")
+            }
+            .font(.caption.monospaced())
+            .foregroundStyle(.white)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(.black.opacity(0.72), in: RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal)
+        .padding(.bottom, 8)
+    }
+
+    private var debugAutoState: String {
+        switch viewModel.autoCaptureState {
+        case .idle:
+            return "idle"
+        case .noPerson:
+            return "noPerson"
+        case .aligning:
+            return "aligning"
+        case .ready:
+            return "ready"
+        case .perfect:
+            return "perfect"
+        case .countdown(let seconds):
+            return "countdown(\(seconds))"
+        }
+    }
+    #endif
 
     private var poseCanvas: some View {
         GeometryReader { proxy in
@@ -168,6 +234,7 @@ struct CameraGuidanceView: View {
                     }
             }
             .buttonStyle(.plain)
+            .disabled(viewModel.captureResult != nil)
         }
         .padding()
         .background(.ultraThinMaterial)
@@ -189,4 +256,3 @@ struct CameraGuidanceView: View {
         }
     }
 }
-
