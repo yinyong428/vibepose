@@ -40,6 +40,7 @@
 		AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1000010000000000000001 /* CaptureResultFactoryTests.swift */; };
 		AD0000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift */; };
 		AE0000010000000000000001 /* CameraGuidanceFramePipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */; };
+		AF0000010000000000000001 /* RecommendationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1000010000000000000001 /* RecommendationServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		AD1000020000000000000001 /* AutoCaptureCoachCopyResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoachCopyResolver.swift; sourceTree = "<group>"; };
 		AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceFramePipelineTests.swift; sourceTree = "<group>"; };
 		AE1000020000000000000001 /* CameraGuidanceFramePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceFramePipeline.swift; sourceTree = "<group>"; };
+		AF1000010000000000000001 /* RecommendationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 				AB5000020000000000000001 /* Capture */,
 				AE5000010000000000000001 /* CameraGuidance */,
 				AB5000030000000000000001 /* Matching */,
+				AF5000010000000000000001 /* Recommendation */,
 			);
 			path = VibePoseTests;
 			sourceTree = "<group>";
@@ -350,6 +353,14 @@
 				AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */,
 			);
 			path = CameraGuidance;
+			sourceTree = "<group>";
+		};
+		AF5000010000000000000001 /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				AF1000010000000000000001 /* RecommendationServiceTests.swift */,
+			);
+			path = Recommendation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,6 +500,7 @@
 				AB0000030000000000000001 /* ScoringActorTests.swift in Sources */,
 				AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */,
 				AE0000010000000000000001 /* CameraGuidanceFramePipelineTests.swift in Sources */,
+				AF0000010000000000000001 /* RecommendationServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

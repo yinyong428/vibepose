@@ -11,16 +11,33 @@ struct RecommendationService {
 
         let filtered = templates.filter { $0.status == .released && $0.subjectCount == 1 }
         guard let currentPose else {
-            return Array(filtered.sorted { $0.difficulty == .easy && $1.difficulty != .easy }.prefix(limit))
+            let sorted = filtered.enumerated()
+                .sorted { lhs, rhs in
+                    let lhsRank = difficultyRank(lhs.element.difficulty)
+                    let rhsRank = difficultyRank(rhs.element.difficulty)
+                    if lhsRank != rhsRank {
+                        return lhsRank < rhsRank
+                    }
+                    return lhs.offset < rhs.offset
+                }
+                .map(\.element)
+
+            return Array(sorted.prefix(limit))
         }
 
-        let scored = filtered.map { template in
-            let diff = poseDistance(lhs: currentPose, rhs: template.pose)
-            return (template, diff)
-        }
-        .sorted { $0.1 < $1.1 }
-        .map(\.0)
-        .filter { $0.id != selectedTemplate?.id }
+        let scored = filtered.enumerated()
+            .map { item in
+                let diff = poseDistance(lhs: currentPose, rhs: item.element.pose)
+                return (item.offset, item.element, diff)
+            }
+            .sorted { lhs, rhs in
+                if lhs.2 != rhs.2 {
+                    return lhs.2 < rhs.2
+                }
+                return lhs.0 < rhs.0
+            }
+            .map(\.1)
+            .filter { $0.id != selectedTemplate?.id }
 
         return Array(scored.prefix(limit))
     }
@@ -39,5 +56,15 @@ struct RecommendationService {
 
         return count == 0 ? 1 : distance / count
     }
-}
 
+    private func difficultyRank(_ difficulty: PoseDifficulty) -> Int {
+        switch difficulty {
+        case .easy:
+            return 0
+        case .medium:
+            return 1
+        case .hard:
+            return 2
+        }
+    }
+}
