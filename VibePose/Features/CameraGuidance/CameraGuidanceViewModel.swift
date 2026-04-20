@@ -1,6 +1,13 @@
 import CoreMedia
 import Foundation
 
+struct CameraGuidanceAlert: Identifiable, Equatable {
+    let titleKey: String
+    let messageKey: String
+
+    var id: String { "\(titleKey)|\(messageKey)" }
+}
+
 @MainActor
 final class CameraGuidanceViewModel: ObservableObject {
     @Published var featureFlags = FeatureFlags()
@@ -15,6 +22,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     @Published var cameraAuthorized = false
     @Published var showsSettings = false
     @Published var captureResult: CaptureResult?
+    @Published var alert: CameraGuidanceAlert?
 
     let cameraController: CameraSessionController
 
@@ -124,6 +132,7 @@ final class CameraGuidanceViewModel: ObservableObject {
 
     private func captureStillPhoto(trigger: CaptureTrigger) async {
         guard !captureInFlight else { return }
+        alert = nil
         captureInFlight = true
         defer { captureInFlight = false }
 
@@ -138,6 +147,13 @@ final class CameraGuidanceViewModel: ObservableObject {
             capturedAt: .now
         )
         captureResult = completion.result
+        if let failureTitleKey = completion.failureTitleKey,
+           let failureMessageKey = completion.failureMessageKey {
+            alert = CameraGuidanceAlert(
+                titleKey: failureTitleKey,
+                messageKey: failureMessageKey
+            )
+        }
 
         guard completion.shouldResetAutoCapture else { return }
         await container.autoCaptureCoordinator.reset()

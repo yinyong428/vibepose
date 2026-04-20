@@ -16,7 +16,9 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 symbolName: "camera.fill",
                 titleKey: "camera.permission_needed",
                 messageKey: "camera.permission_hint",
-                tone: .warning
+                tone: .warning,
+                action: .openSettings,
+                actionKey: "camera.permission_open_settings"
             )
         )
     }
@@ -35,7 +37,9 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 symbolName: "square.stack.3d.up.slash",
                 titleKey: "camera.template_missing_title",
                 messageKey: "camera.template_missing_message",
-                tone: .warning
+                tone: .warning,
+                action: nil,
+                actionKey: nil
             )
         )
     }
@@ -56,7 +60,9 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 symbolName: "figure.stand",
                 titleKey: "camera.select_template_title",
                 messageKey: "camera.select_template_message",
-                tone: .info
+                tone: .info,
+                action: nil,
+                actionKey: nil
             )
         )
     }
@@ -77,7 +83,9 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 symbolName: "person.crop.rectangle.badge.xmark",
                 titleKey: "camera.no_person_title",
                 messageKey: "camera.no_person_message",
-                tone: .info
+                tone: .info,
+                action: nil,
+                actionKey: nil
             )
         )
     }
@@ -98,7 +106,9 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 symbolName: "person.2.crop.square.stack",
                 titleKey: "camera.multi_person_title",
                 messageKey: "camera.multi_person_message",
-                tone: .warning
+                tone: .warning,
+                action: nil,
+                actionKey: nil
             )
         )
     }
@@ -119,7 +129,9 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 symbolName: "figure.stand.line.dotted.figure.stand",
                 titleKey: "camera.partial_subject_title",
                 messageKey: "camera.partial_subject_message",
-                tone: .warning
+                tone: .warning,
+                action: nil,
+                actionKey: nil
             )
         )
     }

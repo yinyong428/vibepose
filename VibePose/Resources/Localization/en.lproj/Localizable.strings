@@ -1,5 +1,6 @@
 "camera.permission_needed" = "Camera permission is required for the Spike.";
 "camera.permission_hint" = "Grant camera access to validate live pose detection, overlay rendering, and switching between front and back cameras.";
+"camera.permission_open_settings" = "Open Settings";
 "camera.template_missing_title" = "No starter templates available.";
 "camera.template_missing_message" = "The local starter pack could not be loaded. Keep the Spike local-first and restore the bundled template manifest before testing capture.";
 "camera.select_template_title" = "Choose a pose template.";
@@ -10,6 +11,8 @@
 "camera.partial_subject_message" = "We can see someone in frame, but not enough of the body to score reliably. Step back or reframe until most joints are visible.";
 "camera.multi_person_title" = "Single-person mode only.";
 "camera.multi_person_message" = "We detected more than one person in frame. Move to a single-subject setup before continuing the MVP capture loop.";
+"camera.capture_failed_title" = "Capture failed";
+"camera.capture_failed_message" = "We couldn't produce a photo from either the still capture pipeline or the live frame fallback. Try again after the preview stabilizes.";
 "camera.recommendations" = "Recommended Poses";
 "camera.cutline" = "Sprint 0 Cut Line";
 "settings.title" = "Settings";

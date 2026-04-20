@@ -1,7 +1,9 @@
 import SwiftUI
+import UIKit
 
 struct CameraGuidanceView: View {
     @StateObject var viewModel: CameraGuidanceViewModel
+    @Environment(\.openURL) private var openURL
     #if DEBUG
     @State private var showsDebugPanel = false
     #endif
@@ -72,6 +74,13 @@ struct CameraGuidanceView: View {
                 }
             )
         }
+        .alert(item: $viewModel.alert) { alert in
+            Alert(
+                title: Text(LocalizedStringKey(alert.titleKey)),
+                message: Text(LocalizedStringKey(alert.messageKey)),
+                dismissButton: .default(Text("result.dismiss"))
+            )
+        }
         .onAppear { viewModel.onAppear() }
         .onDisappear { viewModel.onDisappear() }
     }
@@ -137,6 +146,16 @@ struct CameraGuidanceView: View {
                 Text(LocalizedStringKey(status.messageKey))
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                if let action = status.action, let actionKey = status.actionKey {
+                    Button {
+                        handleExperienceAction(action)
+                    } label: {
+                        Text(LocalizedStringKey(actionKey))
+                            .font(.caption.bold())
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(tint)
+                }
             }
 
             Spacer()
@@ -145,6 +164,14 @@ struct CameraGuidanceView: View {
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
         .padding(.horizontal)
         .padding(.bottom, 8)
+    }
+
+    private func handleExperienceAction(_ action: CameraGuidanceExperienceAction) {
+        switch action {
+        case .openSettings:
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            openURL(url)
+        }
     }
 
     #if DEBUG

@@ -1,5 +1,6 @@
 "camera.permission_needed" = "Spike 需要相机权限。";
 "camera.permission_hint" = "请授权相机，以验证实时骨架识别、叠加渲染和前后摄切换。";
+"camera.permission_open_settings" = "打开设置";
 "camera.template_missing_title" = "本地模板尚未加载。";
 "camera.template_missing_message" = "Starter pack 没有成功读入。请先恢复随包模板清单，再继续验证本地优先的拍摄链路。";
 "camera.select_template_title" = "先选择一个姿势模板。";
@@ -10,6 +11,8 @@
 "camera.partial_subject_message" = "已经检测到有人在画面里，但可见骨架还不够完整，暂时无法稳定评分。请后退一点或重新构图，让大部分关节点都可见。";
 "camera.multi_person_title" = "当前只支持单人拍摄。";
 "camera.multi_person_message" = "画面里检测到了多个人。请先回到单主体场景，再继续验证 MVP 的跟拍闭环。";
+"camera.capture_failed_title" = "拍照失败";
+"camera.capture_failed_message" = "正式拍照和实时帧回退都没能产出图片。请等预览稳定后再试一次。";
 "camera.recommendations" = "推荐姿势";
 "camera.cutline" = "Sprint 0 Cut Line";
 "settings.title" = "设置";

@@ -20,6 +20,8 @@ final class CameraGuidanceCaptureCoordinatorTests: XCTestCase {
 
         let result = try XCTUnwrap(completion.result)
         XCTAssertTrue(completion.shouldResetAutoCapture)
+        XCTAssertNil(completion.failureTitleKey)
+        XCTAssertNil(completion.failureMessageKey)
         XCTAssertEqual(result.representation, .stillPhoto)
         XCTAssertEqual(result.trigger, .automatic)
         XCTAssertEqual(result.templateDisplayNameKey, template.displayNameKey)
@@ -40,6 +42,8 @@ final class CameraGuidanceCaptureCoordinatorTests: XCTestCase {
 
         XCTAssertNil(completion.result)
         XCTAssertTrue(completion.shouldResetAutoCapture)
+        XCTAssertEqual(completion.failureTitleKey, "camera.capture_failed_title")
+        XCTAssertEqual(completion.failureMessageKey, "camera.capture_failed_message")
     }
 
     func testDismissalStateReturnsIdlePresentation() {

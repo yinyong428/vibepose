@@ -4,6 +4,8 @@ import UIKit
 struct CameraGuidanceCaptureCompletion {
     let result: CaptureResult?
     let shouldResetAutoCapture: Bool
+    let failureTitleKey: String?
+    let failureMessageKey: String?
 }
 
 struct CameraGuidanceDismissalState {
@@ -21,17 +23,20 @@ struct CameraGuidanceCaptureCoordinator {
         trigger: CaptureTrigger,
         capturedAt: Date
     ) -> CameraGuidanceCaptureCompletion {
-        CameraGuidanceCaptureCompletion(
-            result: CaptureResultFactory.makeResult(
-                stillImage: stillImage,
-                fallbackImage: fallbackImage,
-                templateDisplayNameKey: selectedTemplate?.displayNameKey ?? "template.unknown",
-                score: score,
-                trigger: trigger,
-                capturedAt: capturedAt
-            ),
+        let result = CaptureResultFactory.makeResult(
+            stillImage: stillImage,
+            fallbackImage: fallbackImage,
+            templateDisplayNameKey: selectedTemplate?.displayNameKey ?? "template.unknown",
+            score: score,
+            trigger: trigger,
+            capturedAt: capturedAt
+        )
+        return CameraGuidanceCaptureCompletion(
+            result: result,
             // Reset even on failure so auto-capture must earn a new cycle.
-            shouldResetAutoCapture: true
+            shouldResetAutoCapture: true,
+            failureTitleKey: result == nil ? "camera.capture_failed_title" : nil,
+            failureMessageKey: result == nil ? "camera.capture_failed_message" : nil
         )
     }
 
