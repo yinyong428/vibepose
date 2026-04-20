@@ -60,9 +60,10 @@ final class CameraGuidanceViewModel: ObservableObject {
     }
 
     func dismissResult() {
-        captureResult = nil
-        autoCaptureState = .idle
-        coachCopy = "coach.idle"
+        let dismissal = container.cameraGuidanceCaptureCoordinator.makeDismissalState()
+        captureResult = dismissal.captureResult
+        autoCaptureState = dismissal.autoCaptureState
+        coachCopy = dismissal.coachCopy
         Task {
             await container.autoCaptureCoordinator.reset()
         }
@@ -127,15 +128,17 @@ final class CameraGuidanceViewModel: ObservableObject {
 
         let stillImage = await cameraController.capturePhoto()
         let fallbackImage = stillImage == nil ? await cameraController.captureLatestFrame() : nil
-        captureResult = CaptureResultFactory.makeResult(
+        let completion = container.cameraGuidanceCaptureCoordinator.completeCapture(
             stillImage: stillImage,
             fallbackImage: fallbackImage,
-            templateDisplayNameKey: selectedTemplate?.displayNameKey ?? "template.unknown",
+            selectedTemplate: selectedTemplate,
             score: poseScore.value,
             trigger: trigger,
             capturedAt: .now
         )
-        guard captureResult != nil else { return }
+        captureResult = completion.result
+
+        guard completion.shouldResetAutoCapture else { return }
         await container.autoCaptureCoordinator.reset()
     }
 

@@ -5,6 +5,7 @@ final class DependencyContainer: ObservableObject {
     let templateRepository = TemplateRepository()
     let scoringActor = ScoringActor()
     let recommendationService = RecommendationService()
+    let cameraGuidanceCaptureCoordinator = CameraGuidanceCaptureCoordinator()
     let cameraGuidanceTemplateStateResolver: CameraGuidanceTemplateStateResolver
     let cameraGuidanceLifecycleCoordinator: CameraGuidanceLifecycleCoordinator
     let autoCaptureCoordinator = AutoCaptureCoordinator()

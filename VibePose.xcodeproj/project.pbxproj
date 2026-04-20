@@ -29,6 +29,7 @@
 		AA0000100000000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000100000000000000001 /* SettingsView.swift */; };
 		AA0000110000000000000001 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000110000000000000001 /* CameraPreviewView.swift */; };
 		B20000010000000000000001 /* CameraGuidanceLifecycleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30000010000000000000001 /* CameraGuidanceLifecycleCoordinator.swift */; };
+		B40000010000000000000001 /* CameraGuidanceCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50000010000000000000001 /* CameraGuidanceCaptureCoordinator.swift */; };
 		AE0000020000000000000001 /* CameraGuidanceFramePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1000020000000000000001 /* CameraGuidanceFramePipeline.swift */; };
 		B00000010000000000000001 /* CameraGuidanceTemplateStateResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000010000000000000001 /* CameraGuidanceTemplateStateResolver.swift */; };
 		AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000120000000000000001 /* CameraGuidanceViewModel.swift */; };
@@ -45,6 +46,7 @@
 		AF0000010000000000000001 /* RecommendationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1000010000000000000001 /* RecommendationServiceTests.swift */; };
 		B00000020000000000000001 /* CameraGuidanceTemplateStateResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000020000000000000001 /* CameraGuidanceTemplateStateResolverTests.swift */; };
 		B20000020000000000000001 /* CameraGuidanceLifecycleCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30000020000000000000001 /* CameraGuidanceLifecycleCoordinatorTests.swift */; };
+		B40000020000000000000001 /* CameraGuidanceCaptureCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50000020000000000000001 /* CameraGuidanceCaptureCoordinatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,7 @@
 		AA1000100000000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1000110000000000000001 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 		B30000010000000000000001 /* CameraGuidanceLifecycleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceLifecycleCoordinator.swift; sourceTree = "<group>"; };
+		B50000010000000000000001 /* CameraGuidanceCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceCaptureCoordinator.swift; sourceTree = "<group>"; };
 		B10000010000000000000001 /* CameraGuidanceTemplateStateResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceTemplateStateResolver.swift; sourceTree = "<group>"; };
 		AA1000120000000000000001 /* CameraGuidanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceViewModel.swift; sourceTree = "<group>"; };
 		AA1000130000000000000001 /* CameraGuidanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceView.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 		AF1000010000000000000001 /* RecommendationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationServiceTests.swift; sourceTree = "<group>"; };
 		B10000020000000000000001 /* CameraGuidanceTemplateStateResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceTemplateStateResolverTests.swift; sourceTree = "<group>"; };
 		B30000020000000000000001 /* CameraGuidanceLifecycleCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceLifecycleCoordinatorTests.swift; sourceTree = "<group>"; };
+		B50000020000000000000001 /* CameraGuidanceCaptureCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceCaptureCoordinatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 			children = (
 				AA1000110000000000000001 /* CameraPreviewView.swift */,
 				B30000010000000000000001 /* CameraGuidanceLifecycleCoordinator.swift */,
+				B50000010000000000000001 /* CameraGuidanceCaptureCoordinator.swift */,
 				B10000010000000000000001 /* CameraGuidanceTemplateStateResolver.swift */,
 				AE1000020000000000000001 /* CameraGuidanceFramePipeline.swift */,
 				AA1000120000000000000001 /* CameraGuidanceViewModel.swift */,
@@ -362,6 +367,7 @@
 			children = (
 				AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */,
 				B30000020000000000000001 /* CameraGuidanceLifecycleCoordinatorTests.swift */,
+				B50000020000000000000001 /* CameraGuidanceCaptureCoordinatorTests.swift */,
 				B10000020000000000000001 /* CameraGuidanceTemplateStateResolverTests.swift */,
 			);
 			path = CameraGuidance;
@@ -498,6 +504,7 @@
 				AA0000100000000000000001 /* SettingsView.swift in Sources */,
 				AA0000110000000000000001 /* CameraPreviewView.swift in Sources */,
 				B20000010000000000000001 /* CameraGuidanceLifecycleCoordinator.swift in Sources */,
+				B40000010000000000000001 /* CameraGuidanceCaptureCoordinator.swift in Sources */,
 				B00000010000000000000001 /* CameraGuidanceTemplateStateResolver.swift in Sources */,
 				AE0000020000000000000001 /* CameraGuidanceFramePipeline.swift in Sources */,
 				AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */,
@@ -515,6 +522,7 @@
 				AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */,
 				AE0000010000000000000001 /* CameraGuidanceFramePipelineTests.swift in Sources */,
 				B20000020000000000000001 /* CameraGuidanceLifecycleCoordinatorTests.swift in Sources */,
+				B40000020000000000000001 /* CameraGuidanceCaptureCoordinatorTests.swift in Sources */,
 				B00000020000000000000001 /* CameraGuidanceTemplateStateResolverTests.swift in Sources */,
 				AF0000010000000000000001 /* RecommendationServiceTests.swift in Sources */,
 			);
