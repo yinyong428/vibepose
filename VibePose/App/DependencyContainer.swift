@@ -6,6 +6,7 @@ final class DependencyContainer: ObservableObject {
     let scoringActor = ScoringActor()
     let recommendationService = RecommendationService()
     let cameraGuidanceTemplateStateResolver: CameraGuidanceTemplateStateResolver
+    let cameraGuidanceLifecycleCoordinator: CameraGuidanceLifecycleCoordinator
     let autoCaptureCoordinator = AutoCaptureCoordinator()
     let cameraGuidanceFramePipeline: CameraGuidanceFramePipeline
     let motionService = MotionService()
@@ -14,6 +15,10 @@ final class DependencyContainer: ObservableObject {
     let visionPoseDetector = VisionPoseDetector()
 
     init() {
+        cameraGuidanceLifecycleCoordinator = CameraGuidanceLifecycleCoordinator(
+            cameraController: cameraSessionController,
+            motionService: motionService
+        )
         cameraGuidanceTemplateStateResolver = CameraGuidanceTemplateStateResolver(
             recommendationService: recommendationService
         )

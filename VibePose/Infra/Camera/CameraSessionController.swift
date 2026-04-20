@@ -154,6 +154,8 @@ final class CameraSessionController: NSObject, AVCapturePhotoCaptureDelegate {
     }
 }
 
+extension CameraSessionController: CameraSessionControlling {}
+
 extension CameraSessionController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(
         _ output: AVCaptureOutput,

@@ -30,19 +30,14 @@ final class CameraGuidanceViewModel: ObservableObject {
 
     func onAppear() {
         Task {
-            cameraAuthorized = await cameraController.requestAccess()
-            guard cameraAuthorized else { return }
-            cameraController.configureSession()
-            cameraController.startRunning()
-            container.motionService.start { [weak self] pitch in
-                self?.pitchText = String(format: "%.2f rad", pitch)
+            cameraAuthorized = await container.cameraGuidanceLifecycleCoordinator.start { [weak self] formattedPitch in
+                self?.pitchText = formattedPitch
             }
         }
     }
 
     func onDisappear() {
-        cameraController.stopRunning()
-        container.motionService.stop()
+        container.cameraGuidanceLifecycleCoordinator.stop()
     }
 
     func selectTemplate(_ template: PoseTemplate) {
