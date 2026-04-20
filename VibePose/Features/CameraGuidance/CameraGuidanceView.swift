@@ -79,6 +79,9 @@ struct CameraGuidanceView: View {
     private var overlay: some View {
         VStack(spacing: 0) {
             coachBar
+            if let experienceStatus {
+                experienceStatusCard(experienceStatus)
+            }
             #if DEBUG
             if showsDebugPanel {
                 debugPanel
@@ -106,6 +109,42 @@ struct CameraGuidanceView: View {
         .padding(12)
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
         .padding()
+    }
+
+    private var experienceStatus: CameraGuidanceExperienceStatus? {
+        CameraGuidanceExperienceStatusResolver.resolve(
+            cameraAuthorized: viewModel.cameraAuthorized,
+            templates: viewModel.templates,
+            selectedTemplate: viewModel.selectedTemplate,
+            autoCaptureState: viewModel.autoCaptureState
+        )
+    }
+
+    private func experienceStatusCard(_ status: CameraGuidanceExperienceStatus) -> some View {
+        let tint: Color = status.tone == .warning ? .orange : .mint
+
+        return HStack(alignment: .top, spacing: 12) {
+            Image(systemName: status.symbolName)
+                .font(.headline)
+                .foregroundStyle(tint)
+                .frame(width: 28, height: 28)
+                .background(tint.opacity(0.14), in: Circle())
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(LocalizedStringKey(status.titleKey))
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                Text(LocalizedStringKey(status.messageKey))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+        }
+        .padding(12)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
+        .padding(.horizontal)
+        .padding(.bottom, 8)
     }
 
     #if DEBUG

@@ -1,5 +1,11 @@
 "camera.permission_needed" = "Camera permission is required for the Spike.";
 "camera.permission_hint" = "Grant camera access to validate live pose detection, overlay rendering, and switching between front and back cameras.";
+"camera.template_missing_title" = "No starter templates available.";
+"camera.template_missing_message" = "The local starter pack could not be loaded. Keep the Spike local-first and restore the bundled template manifest before testing capture.";
+"camera.select_template_title" = "Choose a pose template.";
+"camera.select_template_message" = "Pick one of the local templates below so guidance, scoring, and auto-capture know what to match.";
+"camera.no_person_title" = "Step back into frame.";
+"camera.no_person_message" = "We lost the subject. Re-enter the center of the preview so pose matching and auto-capture can resume.";
 "camera.recommendations" = "Recommended Poses";
 "camera.cutline" = "Sprint 0 Cut Line";
 "settings.title" = "Settings";
