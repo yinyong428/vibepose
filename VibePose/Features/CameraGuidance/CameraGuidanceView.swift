@@ -178,6 +178,8 @@ struct CameraGuidanceView: View {
             return "idle"
         case .noPerson:
             return "noPerson"
+        case .partialSubject:
+            return "partialSubject"
         case .multiPersonUnsupported:
             return "multiPersonUnsupported"
         case .aligning:
@@ -218,6 +220,7 @@ struct CameraGuidanceView: View {
             switch viewModel.autoCaptureState {
             case .idle: return "Idle"
             case .noPerson: return "No Person"
+            case .partialSubject: return "Partial Subject"
             case .multiPersonUnsupported: return "Multi Person"
             case .aligning: return "Aligning"
             case .ready: return "Ready"

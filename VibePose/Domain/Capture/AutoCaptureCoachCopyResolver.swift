@@ -7,6 +7,8 @@ enum AutoCaptureCoachCopyResolver {
             return "coach.idle"
         case .noPerson:
             return "coach.no_person"
+        case .partialSubject:
+            return "coach.partial_subject"
         case .multiPersonUnsupported:
             return "coach.multi_person_unsupported"
         case .aligning:

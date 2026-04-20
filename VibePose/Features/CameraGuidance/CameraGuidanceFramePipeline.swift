@@ -8,6 +8,7 @@ struct CameraGuidanceFrameEvaluation {
 }
 
 actor CameraGuidanceFramePipeline {
+    private let minimumSubjectCoverage = 0.45
     private let scoringActor: ScoringActor
     private let recommendationService: RecommendationService
     private let autoCaptureCoordinator: AutoCaptureCoordinator
@@ -35,6 +36,21 @@ actor CameraGuidanceFramePipeline {
             let decision = AutoCaptureDecision(state: .multiPersonUnsupported, shouldTriggerCapture: false)
             return CameraGuidanceFrameEvaluation(
                 score: PoseScore(value: 0, matchedJoints: 0, coverage: 0),
+                recommendations: recommendationService.recommend(
+                    currentPose: nil,
+                    selectedTemplate: selectedTemplate,
+                    templates: templates
+                ),
+                decision: decision,
+                coachCopy: AutoCaptureCoachCopyResolver.resolve(decision.state)
+            )
+        }
+
+        if let currentPose, currentPose.coverage < minimumSubjectCoverage {
+            await autoCaptureCoordinator.reset()
+            let decision = AutoCaptureDecision(state: .partialSubject, shouldTriggerCapture: false)
+            return CameraGuidanceFrameEvaluation(
+                score: PoseScore(value: 0, matchedJoints: 0, coverage: currentPose.coverage),
                 recommendations: recommendationService.recommend(
                     currentPose: nil,
                     selectedTemplate: selectedTemplate,

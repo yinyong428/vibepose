@@ -103,6 +103,27 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
         )
     }
 
+    func testReturnsPartialSubjectStatusWhenBodyCoverageIsTooLow() {
+        let selected = makeTemplate(id: "selected")
+
+        let status = CameraGuidanceExperienceStatusResolver.resolve(
+            cameraAuthorized: true,
+            templates: [selected],
+            selectedTemplate: selected,
+            autoCaptureState: .partialSubject
+        )
+
+        XCTAssertEqual(
+            status,
+            CameraGuidanceExperienceStatus(
+                symbolName: "figure.stand.line.dotted.figure.stand",
+                titleKey: "camera.partial_subject_title",
+                messageKey: "camera.partial_subject_message",
+                tone: .warning
+            )
+        )
+    }
+
     func testReturnsNilDuringHealthyActiveStates() {
         let selected = makeTemplate(id: "selected")
 

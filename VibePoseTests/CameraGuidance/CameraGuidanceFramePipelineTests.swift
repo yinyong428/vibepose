@@ -101,6 +101,42 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
         XCTAssertEqual(output.recommendations.map(\.id), ["selected", "alternate"])
     }
 
+    func testReturnsPartialSubjectWhenBodyCoverageIsTooLow() async {
+        let pipeline = makePipeline()
+        let selected = makeTemplate(id: "selected", difficulty: .easy, status: .released, offset: 0.0)
+        let alternate = makeTemplate(id: "alternate", difficulty: .medium, status: .released, offset: 0.2)
+        let partialPose = CanonicalPose19(
+            points: Dictionary(uniqueKeysWithValues: JointName.allCases.prefix(6).map { joint in
+                (
+                    joint,
+                    PosePoint(
+                        joint: joint,
+                        x: 0.5,
+                        y: 0.5,
+                        confidence: 1
+                    )
+                )
+            }),
+            coverage: 0.32,
+            source: .vision,
+            mirrorMode: .none
+        )
+
+        let output = await pipeline.evaluate(
+            currentPose: partialPose,
+            subjectStatus: .clear,
+            selectedTemplate: selected,
+            templates: [selected, alternate],
+            autoCaptureEnabled: true,
+            timestamp: 0
+        )
+
+        XCTAssertEqual(output.score, PoseScore(value: 0, matchedJoints: 0, coverage: 0.32))
+        XCTAssertEqual(output.decision, AutoCaptureDecision(state: .partialSubject, shouldTriggerCapture: false))
+        XCTAssertEqual(output.coachCopy, "coach.partial_subject")
+        XCTAssertEqual(output.recommendations.map(\.id), ["selected", "alternate"])
+    }
+
     private func makePipeline() -> CameraGuidanceFramePipeline {
         CameraGuidanceFramePipeline(
             scoringActor: ScoringActor(),

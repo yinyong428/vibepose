@@ -6,6 +6,8 @@
 "camera.select_template_message" = "Pick one of the local templates below so guidance, scoring, and auto-capture know what to match.";
 "camera.no_person_title" = "Step back into frame.";
 "camera.no_person_message" = "We lost the subject. Re-enter the center of the preview so pose matching and auto-capture can resume.";
+"camera.partial_subject_title" = "Show more of the body.";
+"camera.partial_subject_message" = "We can see someone in frame, but not enough of the body to score reliably. Step back or reframe until most joints are visible.";
 "camera.multi_person_title" = "Single-person mode only.";
 "camera.multi_person_message" = "We detected more than one person in frame. Move to a single-subject setup before continuing the MVP capture loop.";
 "camera.recommendations" = "Recommended Poses";
@@ -19,6 +21,7 @@
 "settings.runtime" = "Runtime";
 "coach.idle" = "Pick a template and step into frame.";
 "coach.no_person" = "No subject detected. Step into the center of the frame.";
+"coach.partial_subject" = "We need more of the body in frame before matching can stabilize.";
 "coach.multi_person_unsupported" = "Multiple people detected. This Spike supports one subject at a time.";
 "coach.aligning" = "Keep adjusting. Match the highlighted skeleton.";
 "coach.ready" = "Ready zone. Hold this shape.";

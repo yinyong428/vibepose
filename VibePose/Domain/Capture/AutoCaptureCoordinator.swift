@@ -3,6 +3,7 @@ import Foundation
 enum AutoCaptureState: Equatable {
     case idle
     case noPerson
+    case partialSubject
     case multiPersonUnsupported
     case aligning(Double)
     case ready(Double)

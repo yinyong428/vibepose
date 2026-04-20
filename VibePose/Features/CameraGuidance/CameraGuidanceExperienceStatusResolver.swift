@@ -55,6 +55,15 @@ enum CameraGuidanceExperienceStatusResolver {
             )
         }
 
+        if autoCaptureState == .partialSubject {
+            return CameraGuidanceExperienceStatus(
+                symbolName: "figure.stand.line.dotted.figure.stand",
+                titleKey: "camera.partial_subject_title",
+                messageKey: "camera.partial_subject_message",
+                tone: .warning
+            )
+        }
+
         guard autoCaptureState == .noPerson else {
             return nil
         }
