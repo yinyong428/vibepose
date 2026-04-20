@@ -90,6 +90,29 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
         )
     }
 
+    func testReturnsLowLightStatusWhenPreviewIsTooDark() {
+        let selected = makeTemplate(id: "selected")
+
+        let status = CameraGuidanceExperienceStatusResolver.resolve(
+            cameraAuthorized: true,
+            templates: [selected],
+            selectedTemplate: selected,
+            autoCaptureState: .lowLight
+        )
+
+        XCTAssertEqual(
+            status,
+            CameraGuidanceExperienceStatus(
+                symbolName: "moon.haze.fill",
+                titleKey: "camera.low_light_title",
+                messageKey: "camera.low_light_message",
+                tone: .warning,
+                action: nil,
+                actionKey: nil
+            )
+        )
+    }
+
     func testReturnsMultiPersonUnsupportedStatusWhenSeveralSubjectsDetected() {
         let selected = makeTemplate(id: "selected")
 

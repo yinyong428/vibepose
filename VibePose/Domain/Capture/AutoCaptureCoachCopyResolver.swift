@@ -5,6 +5,8 @@ enum AutoCaptureCoachCopyResolver {
         switch state {
         case .idle:
             return "coach.idle"
+        case .lowLight:
+            return "coach.low_light"
         case .noPerson:
             return "coach.no_person"
         case .partialSubject:

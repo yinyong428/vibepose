@@ -186,6 +186,7 @@ struct CameraGuidanceView: View {
                 Text("template: \(viewModel.selectedTemplate?.templateId ?? "none")")
                 Text("score: \(Int(viewModel.poseScore.value * 100))")
                 Text("coverage: \(String(format: "%.2f", viewModel.detectedPose?.coverage ?? 0))")
+                Text("brightness: \(viewModel.sceneBrightness.map { String(format: "%.2f", $0) } ?? "n/a")")
                 Text("state: \(debugAutoState)")
                 Text("capture result: \(viewModel.captureResult?.representation.rawValue ?? "none")")
             }
@@ -203,6 +204,8 @@ struct CameraGuidanceView: View {
         switch viewModel.autoCaptureState {
         case .idle:
             return "idle"
+        case .lowLight:
+            return "lowLight"
         case .noPerson:
             return "noPerson"
         case .partialSubject:
@@ -246,6 +249,7 @@ struct CameraGuidanceView: View {
         let text: String = {
             switch viewModel.autoCaptureState {
             case .idle: return "Idle"
+            case .lowLight: return "Low Light"
             case .noPerson: return "No Person"
             case .partialSubject: return "Partial Subject"
             case .multiPersonUnsupported: return "Multi Person"

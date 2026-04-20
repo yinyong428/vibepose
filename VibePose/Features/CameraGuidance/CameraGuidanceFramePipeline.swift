@@ -8,6 +8,7 @@ struct CameraGuidanceFrameEvaluation {
 }
 
 actor CameraGuidanceFramePipeline {
+    private let lowLightThreshold = -1.0
     private let minimumSubjectCoverage = 0.45
     private let scoringActor: ScoringActor
     private let recommendationService: RecommendationService
@@ -26,6 +27,7 @@ actor CameraGuidanceFramePipeline {
     func evaluate(
         currentPose: CanonicalPose19?,
         subjectStatus: CameraGuidanceSubjectStatus,
+        environmentBrightness: Double? = nil,
         selectedTemplate: PoseTemplate?,
         templates: [PoseTemplate],
         autoCaptureEnabled: Bool,
@@ -36,6 +38,21 @@ actor CameraGuidanceFramePipeline {
             let decision = AutoCaptureDecision(state: .multiPersonUnsupported, shouldTriggerCapture: false)
             return CameraGuidanceFrameEvaluation(
                 score: PoseScore(value: 0, matchedJoints: 0, coverage: 0),
+                recommendations: recommendationService.recommend(
+                    currentPose: nil,
+                    selectedTemplate: selectedTemplate,
+                    templates: templates
+                ),
+                decision: decision,
+                coachCopy: AutoCaptureCoachCopyResolver.resolve(decision.state)
+            )
+        }
+
+        if let environmentBrightness, environmentBrightness < lowLightThreshold {
+            await autoCaptureCoordinator.reset()
+            let decision = AutoCaptureDecision(state: .lowLight, shouldTriggerCapture: false)
+            return CameraGuidanceFrameEvaluation(
+                score: PoseScore(value: 0, matchedJoints: 0, coverage: currentPose?.coverage ?? 0),
                 recommendations: recommendationService.recommend(
                     currentPose: nil,
                     selectedTemplate: selectedTemplate,

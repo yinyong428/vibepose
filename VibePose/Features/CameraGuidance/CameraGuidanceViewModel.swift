@@ -1,5 +1,6 @@
 import CoreMedia
 import Foundation
+import ImageIO
 
 struct CameraGuidanceAlert: Identifiable, Equatable {
     let titleKey: String
@@ -23,6 +24,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     @Published var showsSettings = false
     @Published var captureResult: CaptureResult?
     @Published var alert: CameraGuidanceAlert?
+    @Published var sceneBrightness: Double?
 
     let cameraController: CameraSessionController
 
@@ -108,6 +110,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     private func process(sampleBuffer: CMSampleBuffer) async {
         guard captureResult == nil else { return }
 
+        sceneBrightness = Self.extractBrightness(from: sampleBuffer)
         let mirrored = cameraController.currentPosition == .front
         let detection = await container.visionPoseDetector.detectPose(in: sampleBuffer, mirrored: mirrored)
         detectedPose = detection.pose
@@ -115,6 +118,7 @@ final class CameraGuidanceViewModel: ObservableObject {
         let evaluation = await container.cameraGuidanceFramePipeline.evaluate(
             currentPose: detection.pose,
             subjectStatus: detection.subjectStatus,
+            environmentBrightness: sceneBrightness,
             selectedTemplate: selectedTemplate,
             templates: templates,
             autoCaptureEnabled: featureFlags.autoCaptureEnabled,
@@ -163,5 +167,23 @@ final class CameraGuidanceViewModel: ObservableObject {
         templates = state.templates
         selectedTemplate = state.selectedTemplate
         recommendations = state.recommendations
+    }
+
+    static func extractBrightness(from sampleBuffer: CMSampleBuffer) -> Double? {
+        guard let attachments = CMCopyDictionaryOfAttachments(
+            allocator: kCFAllocatorDefault,
+            target: sampleBuffer,
+            attachmentMode: kCMAttachmentMode_ShouldPropagate
+        ) as? [String: Any],
+        let exif = attachments[kCGImagePropertyExifDictionary as String] as? [String: Any]
+        else {
+            return nil
+        }
+
+        if let brightness = exif[kCGImagePropertyExifBrightnessValue as String] as? NSNumber {
+            return brightness.doubleValue
+        }
+
+        return exif[kCGImagePropertyExifBrightnessValue as String] as? Double
     }
 }

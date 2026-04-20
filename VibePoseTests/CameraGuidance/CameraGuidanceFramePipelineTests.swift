@@ -101,6 +101,27 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
         XCTAssertEqual(output.recommendations.map(\.id), ["selected", "alternate"])
     }
 
+    func testReturnsLowLightWhenEnvironmentBrightnessDropsBelowThreshold() async {
+        let pipeline = makePipeline()
+        let selected = makeTemplate(id: "selected", difficulty: .easy, status: .released, offset: 0.0)
+        let alternate = makeTemplate(id: "alternate", difficulty: .medium, status: .released, offset: 0.2)
+
+        let output = await pipeline.evaluate(
+            currentPose: selected.pose,
+            subjectStatus: .clear,
+            environmentBrightness: -1.6,
+            selectedTemplate: selected,
+            templates: [selected, alternate],
+            autoCaptureEnabled: true,
+            timestamp: 0
+        )
+
+        XCTAssertEqual(output.score, PoseScore(value: 0, matchedJoints: 0, coverage: 1))
+        XCTAssertEqual(output.decision, AutoCaptureDecision(state: .lowLight, shouldTriggerCapture: false))
+        XCTAssertEqual(output.coachCopy, "coach.low_light")
+        XCTAssertEqual(output.recommendations.map(\.id), ["selected", "alternate"])
+    }
+
     func testReturnsPartialSubjectWhenBodyCoverageIsTooLow() async {
         let pipeline = makePipeline()
         let selected = makeTemplate(id: "selected", difficulty: .easy, status: .released, offset: 0.0)

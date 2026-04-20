@@ -69,6 +69,17 @@ enum CameraGuidanceExperienceStatusResolver {
             )
         }
 
+        if autoCaptureState == .lowLight {
+            return CameraGuidanceExperienceStatus(
+                symbolName: "moon.haze.fill",
+                titleKey: "camera.low_light_title",
+                messageKey: "camera.low_light_message",
+                tone: .warning,
+                action: nil,
+                actionKey: nil
+            )
+        }
+
         if autoCaptureState == .partialSubject {
             return CameraGuidanceExperienceStatus(
                 symbolName: "figure.stand.line.dotted.figure.stand",
