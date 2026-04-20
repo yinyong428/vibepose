@@ -140,16 +140,15 @@ final class CameraGuidanceViewModel: ObservableObject {
 
         let stillImage = await cameraController.capturePhoto()
         let fallbackImage = stillImage == nil ? await cameraController.captureLatestFrame() : nil
-        guard let image = stillImage ?? fallbackImage else { return }
-
-        captureResult = CaptureResult(
-            image: image,
+        captureResult = CaptureResultFactory.makeResult(
+            stillImage: stillImage,
+            fallbackImage: fallbackImage,
             templateDisplayNameKey: selectedTemplate?.displayNameKey ?? "template.unknown",
             score: poseScore.value,
             trigger: trigger,
-            representation: stillImage != nil ? .stillPhoto : .liveFrameFallback,
             capturedAt: .now
         )
+        guard captureResult != nil else { return }
         await container.autoCaptureCoordinator.reset()
     }
 
