@@ -17,6 +17,7 @@
 		AA0000080000000000000001 /* AutoCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000080000000000000001 /* AutoCaptureCoordinator.swift */; };
 		AA0000080000000000000002 /* CaptureResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000080000000000000002 /* CaptureResult.swift */; };
 		AC0000020000000000000001 /* CaptureResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1000020000000000000001 /* CaptureResultFactory.swift */; };
+		AD0000020000000000000001 /* AutoCaptureCoachCopyResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1000020000000000000001 /* AutoCaptureCoachCopyResolver.swift */; };
 		AA0000090000000000000001 /* VisionPoseDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000090000000000000001 /* VisionPoseDetector.swift */; };
 		AA00000A0000000000000001 /* CameraSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000A0000000000000001 /* CameraSessionController.swift */; };
 		AA00000B0000000000000001 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000B0000000000000001 /* MotionService.swift */; };
@@ -36,6 +37,7 @@
 		AB0000020000000000000001 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1000020000000000000001 /* XCTest.framework */; };
 		AB0000030000000000000001 /* ScoringActorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1000040000000000000001 /* ScoringActorTests.swift */; };
 		AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1000010000000000000001 /* CaptureResultFactoryTests.swift */; };
+		AD0000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		AB1000040000000000000001 /* ScoringActorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringActorTests.swift; sourceTree = "<group>"; };
 		AC1000010000000000000001 /* CaptureResultFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureResultFactoryTests.swift; sourceTree = "<group>"; };
 		AC1000020000000000000001 /* CaptureResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureResultFactory.swift; sourceTree = "<group>"; };
+		AD1000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoachCopyResolverTests.swift; sourceTree = "<group>"; };
+		AD1000020000000000000001 /* AutoCaptureCoachCopyResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoachCopyResolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,7 @@
 			children = (
 				AA1000080000000000000001 /* AutoCaptureCoordinator.swift */,
 				AA1000080000000000000002 /* CaptureResult.swift */,
+				AD1000020000000000000001 /* AutoCaptureCoachCopyResolver.swift */,
 				AC1000020000000000000001 /* CaptureResultFactory.swift */,
 			);
 			path = Capture;
@@ -319,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				AB1000010000000000000001 /* AutoCaptureCoordinatorTests.swift */,
+				AD1000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift */,
 				AC1000010000000000000001 /* CaptureResultFactoryTests.swift */,
 			);
 			path = Capture;
@@ -442,6 +448,7 @@
 				AA0000070000000000000001 /* RecommendationService.swift in Sources */,
 				AA0000080000000000000001 /* AutoCaptureCoordinator.swift in Sources */,
 				AA0000080000000000000002 /* CaptureResult.swift in Sources */,
+				AD0000020000000000000001 /* AutoCaptureCoachCopyResolver.swift in Sources */,
 				AC0000020000000000000001 /* CaptureResultFactory.swift in Sources */,
 				AA0000090000000000000001 /* VisionPoseDetector.swift in Sources */,
 				AA00000A0000000000000001 /* CameraSessionController.swift in Sources */,
@@ -463,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB0000010000000000000001 /* AutoCaptureCoordinatorTests.swift in Sources */,
+				AD0000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift in Sources */,
 				AB0000030000000000000001 /* ScoringActorTests.swift in Sources */,
 				AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */,
 			);

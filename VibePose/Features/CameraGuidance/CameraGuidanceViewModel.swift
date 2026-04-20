@@ -126,7 +126,7 @@ final class CameraGuidanceViewModel: ObservableObject {
             timestamp: ProcessInfo.processInfo.systemUptime
         )
         autoCaptureState = decision.state
-        coachCopy = coachKey(for: autoCaptureState)
+        coachCopy = AutoCaptureCoachCopyResolver.resolve(autoCaptureState)
 
         if decision.shouldTriggerCapture {
             await captureStillPhoto(trigger: .automatic)
@@ -150,22 +150,5 @@ final class CameraGuidanceViewModel: ObservableObject {
         )
         guard captureResult != nil else { return }
         await container.autoCaptureCoordinator.reset()
-    }
-
-    private func coachKey(for state: AutoCaptureState) -> String {
-        switch state {
-        case .idle:
-            return "coach.idle"
-        case .noPerson:
-            return "coach.no_person"
-        case .aligning:
-            return "coach.aligning"
-        case .ready:
-            return "coach.ready"
-        case .perfect:
-            return "coach.perfect"
-        case .countdown(let seconds):
-            return "coach.countdown_\(seconds)"
-        }
     }
 }
