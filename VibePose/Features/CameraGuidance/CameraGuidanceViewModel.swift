@@ -46,7 +46,12 @@ final class CameraGuidanceViewModel: ObservableObject {
     }
 
     func selectTemplate(_ template: PoseTemplate) {
-        selectedTemplate = template
+        let state = container.cameraGuidanceTemplateStateResolver.selecting(
+            template,
+            templates: templates,
+            currentPose: detectedPose
+        )
+        applyTemplateState(state)
     }
 
     func toggleCamera() {
@@ -90,16 +95,9 @@ final class CameraGuidanceViewModel: ObservableObject {
     private func loadTemplates() {
         do {
             let loadedTemplates = try container.templateRepository.loadStarterPack()
-            templates = loadedTemplates
-            selectedTemplate = loadedTemplates.first
-            recommendations = container.recommendationService.recommend(
-                currentPose: nil,
-                selectedTemplate: selectedTemplate,
-                templates: loadedTemplates
-            )
+            applyTemplateState(container.cameraGuidanceTemplateStateResolver.makeInitialState(from: loadedTemplates))
         } catch {
-            templates = []
-            recommendations = []
+            applyTemplateState(container.cameraGuidanceTemplateStateResolver.makeInitialState(from: []))
         }
     }
 
@@ -144,5 +142,11 @@ final class CameraGuidanceViewModel: ObservableObject {
         )
         guard captureResult != nil else { return }
         await container.autoCaptureCoordinator.reset()
+    }
+
+    private func applyTemplateState(_ state: CameraGuidanceTemplateState) {
+        templates = state.templates
+        selectedTemplate = state.selectedTemplate
+        recommendations = state.recommendations
     }
 }
