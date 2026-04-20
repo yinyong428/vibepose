@@ -6,6 +6,8 @@
 "camera.select_template_message" = "从下方本地模板里选一个，实时引导、评分和自动快门才知道该跟拍什么姿势。";
 "camera.no_person_title" = "请重新回到画面里。";
 "camera.no_person_message" = "当前丢失了主体，请回到取景框中央，让姿势匹配和自动快门继续工作。";
+"camera.multi_person_title" = "当前只支持单人拍摄。";
+"camera.multi_person_message" = "画面里检测到了多个人。请先回到单主体场景，再继续验证 MVP 的跟拍闭环。";
 "camera.recommendations" = "推荐姿势";
 "camera.cutline" = "Sprint 0 Cut Line";
 "settings.title" = "设置";
@@ -17,6 +19,7 @@
 "settings.runtime" = "运行基线";
 "coach.idle" = "先选一个模板，再走进取景框。";
 "coach.no_person" = "未识别到主体，请站到画面中间。";
+"coach.multi_person_unsupported" = "当前检测到多人，Spike 版本暂只支持单人。";
 "coach.aligning" = "继续调整，让身体贴近高亮骨架。";
 "coach.ready" = "已进入可拍区，保持姿势。";
 "coach.perfect" = "姿势很好，保持不动。";

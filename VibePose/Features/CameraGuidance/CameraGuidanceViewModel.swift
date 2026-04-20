@@ -101,11 +101,12 @@ final class CameraGuidanceViewModel: ObservableObject {
         guard captureResult == nil else { return }
 
         let mirrored = cameraController.currentPosition == .front
-        let pose = await container.visionPoseDetector.detectPose(in: sampleBuffer, mirrored: mirrored)
-        detectedPose = pose
+        let detection = await container.visionPoseDetector.detectPose(in: sampleBuffer, mirrored: mirrored)
+        detectedPose = detection.pose
 
         let evaluation = await container.cameraGuidanceFramePipeline.evaluate(
-            currentPose: pose,
+            currentPose: detection.pose,
+            subjectStatus: detection.subjectStatus,
             selectedTemplate: selectedTemplate,
             templates: templates,
             autoCaptureEnabled: featureFlags.autoCaptureEnabled,

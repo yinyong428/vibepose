@@ -5,6 +5,7 @@ final class AutoCaptureCoachCopyResolverTests: XCTestCase {
     func testResolvesStaticStatesToExpectedKeys() {
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.idle), "coach.idle")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.noPerson), "coach.no_person")
+        XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.multiPersonUnsupported), "coach.multi_person_unsupported")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.aligning(0.32)), "coach.aligning")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.ready(0.81)), "coach.ready")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.perfect(0.94)), "coach.perfect")

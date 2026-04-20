@@ -46,6 +46,15 @@ enum CameraGuidanceExperienceStatusResolver {
             )
         }
 
+        if autoCaptureState == .multiPersonUnsupported {
+            return CameraGuidanceExperienceStatus(
+                symbolName: "person.2.crop.square.stack",
+                titleKey: "camera.multi_person_title",
+                messageKey: "camera.multi_person_message",
+                tone: .warning
+            )
+        }
+
         guard autoCaptureState == .noPerson else {
             return nil
         }

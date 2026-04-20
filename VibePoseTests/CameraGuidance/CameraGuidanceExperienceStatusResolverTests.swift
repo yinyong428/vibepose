@@ -82,6 +82,27 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
         )
     }
 
+    func testReturnsMultiPersonUnsupportedStatusWhenSeveralSubjectsDetected() {
+        let selected = makeTemplate(id: "selected")
+
+        let status = CameraGuidanceExperienceStatusResolver.resolve(
+            cameraAuthorized: true,
+            templates: [selected],
+            selectedTemplate: selected,
+            autoCaptureState: .multiPersonUnsupported
+        )
+
+        XCTAssertEqual(
+            status,
+            CameraGuidanceExperienceStatus(
+                symbolName: "person.2.crop.square.stack",
+                titleKey: "camera.multi_person_title",
+                messageKey: "camera.multi_person_message",
+                tone: .warning
+            )
+        )
+    }
+
     func testReturnsNilDuringHealthyActiveStates() {
         let selected = makeTemplate(id: "selected")
 

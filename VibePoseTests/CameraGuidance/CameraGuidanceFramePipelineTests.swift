@@ -10,6 +10,7 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
 
         let output = await pipeline.evaluate(
             currentPose: nil,
+            subjectStatus: .noPerson,
             selectedTemplate: selected,
             templates: [selected, easy, draft],
             autoCaptureEnabled: true,
@@ -29,6 +30,7 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
 
         let output = await pipeline.evaluate(
             currentPose: selected.pose,
+            subjectStatus: .clear,
             selectedTemplate: selected,
             templates: [selected, alternate],
             autoCaptureEnabled: false,
@@ -50,6 +52,7 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
 
         _ = await pipeline.evaluate(
             currentPose: selected.pose,
+            subjectStatus: .clear,
             selectedTemplate: selected,
             templates: [selected, alternate],
             autoCaptureEnabled: true,
@@ -57,6 +60,7 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
         )
         let countdown = await pipeline.evaluate(
             currentPose: selected.pose,
+            subjectStatus: .clear,
             selectedTemplate: selected,
             templates: [selected, alternate],
             autoCaptureEnabled: true,
@@ -64,6 +68,7 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
         )
         let trigger = await pipeline.evaluate(
             currentPose: selected.pose,
+            subjectStatus: .clear,
             selectedTemplate: selected,
             templates: [selected, alternate],
             autoCaptureEnabled: true,
@@ -74,6 +79,26 @@ final class CameraGuidanceFramePipelineTests: XCTestCase {
         XCTAssertEqual(countdown.coachCopy, "coach.countdown_3")
         XCTAssertEqual(trigger.decision, AutoCaptureDecision(state: .countdown(1), shouldTriggerCapture: true))
         XCTAssertEqual(trigger.coachCopy, "coach.countdown_1")
+    }
+
+    func testReturnsMultiPersonUnsupportedWhenSceneContainsMultipleSubjects() async {
+        let pipeline = makePipeline()
+        let selected = makeTemplate(id: "selected", difficulty: .easy, status: .released, offset: 0.0)
+        let alternate = makeTemplate(id: "alternate", difficulty: .medium, status: .released, offset: 0.2)
+
+        let output = await pipeline.evaluate(
+            currentPose: nil,
+            subjectStatus: .multiPersonUnsupported,
+            selectedTemplate: selected,
+            templates: [selected, alternate],
+            autoCaptureEnabled: true,
+            timestamp: 0
+        )
+
+        XCTAssertEqual(output.score, PoseScore(value: 0, matchedJoints: 0, coverage: 0))
+        XCTAssertEqual(output.decision, AutoCaptureDecision(state: .multiPersonUnsupported, shouldTriggerCapture: false))
+        XCTAssertEqual(output.coachCopy, "coach.multi_person_unsupported")
+        XCTAssertEqual(output.recommendations.map(\.id), ["selected", "alternate"])
     }
 
     private func makePipeline() -> CameraGuidanceFramePipeline {

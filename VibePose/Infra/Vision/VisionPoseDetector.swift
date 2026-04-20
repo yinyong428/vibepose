@@ -1,20 +1,54 @@
 import CoreMedia
 import Vision
 
+enum CameraGuidanceSubjectStatus: Equatable {
+    case clear
+    case noPerson
+    case multiPersonUnsupported
+}
+
+struct VisionPoseDetection {
+    let pose: CanonicalPose19?
+    let subjectStatus: CameraGuidanceSubjectStatus
+}
+
 actor VisionPoseDetector {
     private let request = VNDetectHumanBodyPoseRequest()
 
-    func detectPose(in buffer: CMSampleBuffer, mirrored: Bool) async -> CanonicalPose19? {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(buffer) else { return nil }
+    func detectPose(in buffer: CMSampleBuffer, mirrored: Bool) async -> VisionPoseDetection {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(buffer) else {
+            return VisionPoseDetection(pose: nil, subjectStatus: .noPerson)
+        }
+
         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up)
 
         do {
             try handler.perform([request])
-            guard let observation = request.results?.first else { return nil }
+            let observations = request.results ?? []
+            let subjectStatus = Self.subjectStatus(forObservationCount: observations.count)
+            guard subjectStatus == .clear, let observation = observations.first else {
+                return VisionPoseDetection(pose: nil, subjectStatus: subjectStatus)
+            }
+
             let recognizedPoints = try observation.recognizedPoints(.all)
-            return Self.map(points: recognizedPoints, mirrored: mirrored)
+            let pose = Self.map(points: recognizedPoints, mirrored: mirrored)
+            return VisionPoseDetection(
+                pose: pose,
+                subjectStatus: pose == nil ? .noPerson : .clear
+            )
         } catch {
-            return nil
+            return VisionPoseDetection(pose: nil, subjectStatus: .noPerson)
+        }
+    }
+
+    static func subjectStatus(forObservationCount count: Int) -> CameraGuidanceSubjectStatus {
+        switch count {
+        case 0:
+            return .noPerson
+        case 1:
+            return .clear
+        default:
+            return .multiPersonUnsupported
         }
     }
 
@@ -80,4 +114,3 @@ actor VisionPoseDetector {
         )
     }
 }
-
