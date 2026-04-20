@@ -28,6 +28,7 @@
 		AA00000F0000000000000002 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10000F0000000000000002 /* ActivityView.swift */; };
 		AA0000100000000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000100000000000000001 /* SettingsView.swift */; };
 		AA0000110000000000000001 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000110000000000000001 /* CameraPreviewView.swift */; };
+		AE0000020000000000000001 /* CameraGuidanceFramePipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1000020000000000000001 /* CameraGuidanceFramePipeline.swift */; };
 		AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000120000000000000001 /* CameraGuidanceViewModel.swift */; };
 		AA0000130000000000000001 /* CameraGuidanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000130000000000000001 /* CameraGuidanceView.swift */; };
 		AA0000140000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1000140000000000000001 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		AB0000030000000000000001 /* ScoringActorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1000040000000000000001 /* ScoringActorTests.swift */; };
 		AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1000010000000000000001 /* CaptureResultFactoryTests.swift */; };
 		AD0000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift */; };
+		AE0000010000000000000001 /* CameraGuidanceFramePipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		AC1000020000000000000001 /* CaptureResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureResultFactory.swift; sourceTree = "<group>"; };
 		AD1000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoachCopyResolverTests.swift; sourceTree = "<group>"; };
 		AD1000020000000000000001 /* AutoCaptureCoachCopyResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCaptureCoachCopyResolver.swift; sourceTree = "<group>"; };
+		AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceFramePipelineTests.swift; sourceTree = "<group>"; };
+		AE1000020000000000000001 /* CameraGuidanceFramePipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraGuidanceFramePipeline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1000110000000000000001 /* CameraPreviewView.swift */,
+				AE1000020000000000000001 /* CameraGuidanceFramePipeline.swift */,
 				AA1000120000000000000001 /* CameraGuidanceViewModel.swift */,
 				AA1000130000000000000001 /* CameraGuidanceView.swift */,
 			);
@@ -315,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				AB5000020000000000000001 /* Capture */,
+				AE5000010000000000000001 /* CameraGuidance */,
 				AB5000030000000000000001 /* Matching */,
 			);
 			path = VibePoseTests;
@@ -336,6 +342,14 @@
 				AB1000040000000000000001 /* ScoringActorTests.swift */,
 			);
 			path = Matching;
+			sourceTree = "<group>";
+		};
+		AE5000010000000000000001 /* CameraGuidance */ = {
+			isa = PBXGroup;
+			children = (
+				AE1000010000000000000001 /* CameraGuidanceFramePipelineTests.swift */,
+			);
+			path = CameraGuidance;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,6 +474,7 @@
 				AA00000F0000000000000002 /* ActivityView.swift in Sources */,
 				AA0000100000000000000001 /* SettingsView.swift in Sources */,
 				AA0000110000000000000001 /* CameraPreviewView.swift in Sources */,
+				AE0000020000000000000001 /* CameraGuidanceFramePipeline.swift in Sources */,
 				AA0000120000000000000001 /* CameraGuidanceViewModel.swift in Sources */,
 				AA0000130000000000000001 /* CameraGuidanceView.swift in Sources */,
 			);
@@ -473,6 +488,7 @@
 				AD0000010000000000000001 /* AutoCaptureCoachCopyResolverTests.swift in Sources */,
 				AB0000030000000000000001 /* ScoringActorTests.swift in Sources */,
 				AC0000010000000000000001 /* CaptureResultFactoryTests.swift in Sources */,
+				AE0000010000000000000001 /* CameraGuidanceFramePipelineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -110,25 +110,19 @@ final class CameraGuidanceViewModel: ObservableObject {
         let pose = await container.visionPoseDetector.detectPose(in: sampleBuffer, mirrored: mirrored)
         detectedPose = pose
 
-        let score = await container.scoringActor.score(current: pose, target: selectedTemplate)
-        poseScore = score
-
-        recommendations = container.recommendationService.recommend(
+        let evaluation = await container.cameraGuidanceFramePipeline.evaluate(
             currentPose: pose,
             selectedTemplate: selectedTemplate,
-            templates: templates
-        )
-
-        let decision = await container.autoCaptureCoordinator.evaluate(
-            score: score,
-            target: selectedTemplate,
+            templates: templates,
             autoCaptureEnabled: featureFlags.autoCaptureEnabled,
             timestamp: ProcessInfo.processInfo.systemUptime
         )
-        autoCaptureState = decision.state
-        coachCopy = AutoCaptureCoachCopyResolver.resolve(autoCaptureState)
+        poseScore = evaluation.score
+        recommendations = evaluation.recommendations
+        autoCaptureState = evaluation.decision.state
+        coachCopy = evaluation.coachCopy
 
-        if decision.shouldTriggerCapture {
+        if evaluation.decision.shouldTriggerCapture {
             await captureStillPhoto(trigger: .automatic)
         }
     }
