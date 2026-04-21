@@ -100,6 +100,9 @@ struct CameraGuidanceView: View {
             if let experienceStatus {
                 experienceStatusCard(experienceStatus)
             }
+            if let importMatch = viewModel.importMatch {
+                importMatchCard(importMatch)
+            }
             #if DEBUG
             if showsDebugPanel {
                 debugPanel
@@ -184,6 +187,51 @@ struct CameraGuidanceView: View {
         }
     }
 
+    private func importMatchCard(_ match: CameraGuidanceImportMatch) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "sparkles.rectangle.stack")
+                .font(.headline)
+                .foregroundStyle(.mint)
+                .frame(width: 28, height: 28)
+                .background(.mint.opacity(0.14), in: Circle())
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text("camera.import_matched_title")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                Text("camera.import_matched_message")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                HStack(spacing: 8) {
+                    Text(LocalizedStringKey(match.templateDisplayNameKey))
+                        .font(.caption.bold())
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(.mint.opacity(0.2), in: Capsule())
+
+                    Text(
+                        String(
+                            format: NSLocalizedString(
+                                "camera.import_matched_alternatives %d",
+                                comment: ""
+                            ),
+                            match.alternativesCount
+                        )
+                    )
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                }
+            }
+
+            Spacer()
+        }
+        .padding(12)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
+        .padding(.horizontal)
+        .padding(.bottom, 8)
+    }
+
     #if DEBUG
     private var debugPanel: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -199,6 +247,7 @@ struct CameraGuidanceView: View {
                 Text("brightness: \(viewModel.sceneBrightness.map { String(format: "%.2f", $0) } ?? "n/a")")
                 Text("state: \(debugAutoState)")
                 Text("import: \(debugImportState)")
+                Text("import match: \(viewModel.importMatch?.templateID ?? "none")")
                 Text("capture result: \(viewModel.captureResult?.representation.rawValue ?? "none")")
             }
             .font(.caption.monospaced())

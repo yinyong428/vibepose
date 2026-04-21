@@ -13,6 +13,7 @@ final class CameraGuidanceTemplateStateResolverTests: XCTestCase {
         XCTAssertEqual(state.templates.map(\.id), ["first", "easy", "draft"])
         XCTAssertEqual(state.selectedTemplate?.id, "first")
         XCTAssertEqual(state.recommendations.map(\.id), ["easy", "first"])
+        XCTAssertNil(state.importMatch)
     }
 
     func testInitialStateHandlesEmptyTemplates() {
@@ -23,6 +24,7 @@ final class CameraGuidanceTemplateStateResolverTests: XCTestCase {
         XCTAssertTrue(state.templates.isEmpty)
         XCTAssertNil(state.selectedTemplate)
         XCTAssertTrue(state.recommendations.isEmpty)
+        XCTAssertNil(state.importMatch)
     }
 
     func testSelectingTemplateImmediatelyRefreshesRecommendationsWithoutPose() {
@@ -39,6 +41,7 @@ final class CameraGuidanceTemplateStateResolverTests: XCTestCase {
 
         XCTAssertEqual(state.selectedTemplate?.id, "medium")
         XCTAssertEqual(state.recommendations.map(\.id), ["easy", "medium", "hard"])
+        XCTAssertNil(state.importMatch)
     }
 
     func testSelectingTemplateUsesCurrentPoseForDistanceRanking() {
@@ -55,6 +58,7 @@ final class CameraGuidanceTemplateStateResolverTests: XCTestCase {
 
         XCTAssertEqual(state.selectedTemplate?.id, "selected")
         XCTAssertEqual(state.recommendations.map(\.id), ["close", "far"])
+        XCTAssertNil(state.importMatch)
     }
 
     func testImportingPoseSelectsClosestTemplateAndBuildsAlternatives() {
@@ -67,6 +71,9 @@ final class CameraGuidanceTemplateStateResolverTests: XCTestCase {
 
         XCTAssertEqual(state.selectedTemplate?.id, "close")
         XCTAssertEqual(state.recommendations.map(\.id), ["medium", "far"])
+        XCTAssertEqual(state.importMatch?.templateID, "close")
+        XCTAssertEqual(state.importMatch?.templateDisplayNameKey, "pose.template.close.title")
+        XCTAssertEqual(state.importMatch?.alternativesCount, 2)
     }
 
     private func makeTemplate(

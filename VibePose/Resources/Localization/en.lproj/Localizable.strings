@@ -6,6 +6,9 @@
 "camera.import_failed_title" = "Pose import failed.";
 "camera.import_failed_message" = "We couldn't find a clean single-person body pose in that image. Try a brighter, full-body reference with one subject.";
 "camera.import_pose" = "Import Pose";
+"camera.import_matched_title" = "Reference pose matched.";
+"camera.import_matched_message" = "We picked the closest local template from your imported photo and refreshed the suggestions below.";
+"camera.import_matched_alternatives %d" = "%d alternates ready";
 "camera.select_template_title" = "Choose a pose template.";
 "camera.select_template_message" = "Pick one of the local templates below so guidance, scoring, and auto-capture know what to match.";
 "camera.stabilizing_title" = "Preview is stabilizing.";

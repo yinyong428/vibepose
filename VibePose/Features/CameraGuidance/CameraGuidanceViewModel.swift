@@ -26,6 +26,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     @Published var alert: CameraGuidanceAlert?
     @Published var sceneBrightness: Double?
     @Published var importState: CameraGuidanceImportState = .idle
+    @Published var importMatch: CameraGuidanceImportMatch?
 
     let cameraController: CameraSessionController
 
@@ -80,6 +81,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     func importPoseImage(data: Data) async {
         guard featureFlags.copyPoseEnabled else { return }
         importState = .importing
+        importMatch = nil
 
         let detection = await container.visionPoseDetector.detectPose(in: data, mirrored: false)
         guard detection.subjectStatus == .clear, let pose = detection.pose else {
@@ -195,6 +197,7 @@ final class CameraGuidanceViewModel: ObservableObject {
         templates = state.templates
         selectedTemplate = state.selectedTemplate
         recommendations = state.recommendations
+        importMatch = state.importMatch
     }
 
     private func markPreviewWarmup() {
