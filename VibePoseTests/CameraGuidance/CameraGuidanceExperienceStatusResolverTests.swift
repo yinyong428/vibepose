@@ -221,6 +221,44 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
         XCTAssertNil(status)
     }
 
+    func testStagePresentationForAligningHighlightsScoreProgress() {
+        let presentation = CameraGuidanceExperienceStatusResolver.stagePresentation(
+            autoCaptureState: .aligning(0.41),
+            score: PoseScore(value: 0.41, matchedJoints: 13, coverage: 0.8)
+        )
+
+        XCTAssertEqual(presentation.titleKey, "camera.stage.aligning_title")
+        XCTAssertEqual(presentation.tone, .progress)
+        XCTAssertEqual(presentation.progress, 0.41, accuracy: 0.001)
+        XCTAssertEqual(presentation.emphasisText, "41")
+        XCTAssertEqual(presentation.emphasisCaptionKey, "camera.stage.match_label")
+    }
+
+    func testStagePresentationForCountdownPromotesCaptureMoment() {
+        let presentation = CameraGuidanceExperienceStatusResolver.stagePresentation(
+            autoCaptureState: .countdown(2),
+            score: PoseScore(value: 0.96, matchedJoints: 19, coverage: 1)
+        )
+
+        XCTAssertEqual(presentation.titleKey, "camera.stage.countdown_title")
+        XCTAssertEqual(presentation.tone, .success)
+        XCTAssertEqual(presentation.progress, 1.0, accuracy: 0.001)
+        XCTAssertEqual(presentation.emphasisText, "2")
+        XCTAssertEqual(presentation.emphasisCaptionKey, "camera.stage.seconds_label")
+    }
+
+    func testStagePresentationForWarningStateUsesWarningTone() {
+        let presentation = CameraGuidanceExperienceStatusResolver.stagePresentation(
+            autoCaptureState: .lowLight,
+            score: PoseScore(value: 0, matchedJoints: 0, coverage: 0)
+        )
+
+        XCTAssertEqual(presentation.titleKey, "camera.low_light_title")
+        XCTAssertEqual(presentation.tone, .warning)
+        XCTAssertEqual(presentation.progress, 0.08, accuracy: 0.001)
+        XCTAssertNil(presentation.emphasisText)
+    }
+
     private func makeTemplate(id: String) -> PoseTemplate {
         let points = Dictionary(uniqueKeysWithValues: JointName.allCases.map { joint in
             (

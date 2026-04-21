@@ -92,6 +92,9 @@ struct CameraGuidanceView: View {
         }
         .onAppear { viewModel.onAppear() }
         .onDisappear { viewModel.onDisappear() }
+        .onChange(of: viewModel.autoCaptureState, initial: false) { _, newValue in
+            playHaptic(for: newValue)
+        }
     }
 
     private var overlay: some View {
@@ -117,19 +120,100 @@ struct CameraGuidanceView: View {
     }
 
     private var coachBar: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(LocalizedStringKey(viewModel.coachCopy))
-                    .font(.headline)
-                Text("Score \(Int(viewModel.poseScore.value * 100)) · Pitch \(viewModel.pitchText)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(alignment: .top, spacing: 12) {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 8) {
+                        pillLabel(
+                            title: viewModel.selectedTemplate.map { LocalizedStringKey($0.displayNameKey) } ?? "template.unknown",
+                            tint: .white.opacity(0.18)
+                        )
+                        pillLabel(
+                            title: viewModel.featureFlags.autoCaptureEnabled ? "camera.stage.auto_enabled" : "camera.stage.manual_mode",
+                            tint: stageTint.opacity(0.2)
+                        )
+                    }
+
+                    Text(LocalizedStringKey(stagePresentation.titleKey))
+                        .font(.title3.weight(.bold))
+                        .foregroundStyle(.white)
+                    Text(LocalizedStringKey(viewModel.coachCopy))
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.82))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer()
             }
-            Spacer()
+
+            HStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .stroke(.white.opacity(0.12), lineWidth: 10)
+                    Circle()
+                        .trim(from: 0, to: stagePresentation.progress)
+                        .stroke(stageTint, style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                        .rotationEffect(.degrees(-90))
+                        .shadow(color: stageTint.opacity(0.35), radius: 10, y: 4)
+                    VStack(spacing: 4) {
+                        if let emphasisText = stagePresentation.emphasisText {
+                            Text(emphasisText)
+                                .font(.system(size: 30, weight: .bold, design: .rounded))
+                                .foregroundStyle(.white)
+                        } else {
+                            Image(systemName: stageFallbackSymbolName)
+                                .font(.system(size: 24, weight: .semibold))
+                                .foregroundStyle(stageTint)
+                        }
+                        Text(LocalizedStringKey(stagePresentation.emphasisCaptionKey ?? "camera.stage.live_label"))
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.white.opacity(0.72))
+                    }
+                }
+                .frame(width: 96, height: 96)
+                .animation(.spring(response: 0.35, dampingFraction: 0.82), value: stagePresentation.progress)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 8) {
+                        statChip(text: matchValueText)
+                        statChip(text: pitchValueText)
+                    }
+
+                    ProgressView(value: stagePresentation.progress)
+                        .tint(stageTint)
+                        .scaleEffect(x: 1, y: 1.15, anchor: .center)
+
+                    Text(LocalizedStringKey(stageFooterKey))
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.72))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
-        .padding(12)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
+        .padding(16)
+        .background(
+            LinearGradient(
+                colors: [
+                    stageTint.opacity(0.34),
+                    Color.black.opacity(0.76)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ),
+            in: RoundedRectangle(cornerRadius: 26, style: .continuous)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 26, style: .continuous)
+                .stroke(.white.opacity(0.08), lineWidth: 1)
+        )
         .padding()
+    }
+
+    private var stagePresentation: CameraGuidanceStagePresentation {
+        CameraGuidanceExperienceStatusResolver.stagePresentation(
+            autoCaptureState: viewModel.autoCaptureState,
+            score: viewModel.poseScore
+        )
     }
 
     private var experienceStatus: CameraGuidanceExperienceStatus? {
@@ -184,6 +268,104 @@ struct CameraGuidanceView: View {
         case .openSettings:
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
             openURL(url)
+        }
+    }
+
+    private var stageTint: Color {
+        switch stagePresentation.tone {
+        case .neutral:
+            return .white
+        case .progress:
+            return .orange
+        case .primed:
+            return .yellow
+        case .success:
+            return .mint
+        case .warning:
+            return .orange
+        }
+    }
+
+    private var stageFallbackSymbolName: String {
+        switch viewModel.autoCaptureState {
+        case .idle:
+            return "figure.stand"
+        case .stabilizing:
+            return "camera.aperture"
+        case .lowLight:
+            return "moon.haze.fill"
+        case .noPerson:
+            return "person.crop.rectangle.badge.xmark"
+        case .partialSubject:
+            return "figure.stand.line.dotted.figure.stand"
+        case .multiPersonUnsupported:
+            return "person.2.crop.square.stack"
+        case .aligning:
+            return "scope"
+        case .ready:
+            return "hand.raised.fill"
+        case .perfect:
+            return "sparkles"
+        case .countdown:
+            return "camera.shutter.button"
+        }
+    }
+
+    private var stageFooterKey: String {
+        switch viewModel.autoCaptureState {
+        case .countdown:
+            return "camera.stage.footer_countdown"
+        case .perfect:
+            return "camera.stage.footer_perfect"
+        case .ready:
+            return "camera.stage.footer_ready"
+        default:
+            return "camera.stage.footer_guidance"
+        }
+    }
+
+    private var matchValueText: String {
+        String(
+            format: NSLocalizedString("camera.stage.match_value %d", comment: ""),
+            Int(viewModel.poseScore.value * 100)
+        )
+    }
+
+    private var pitchValueText: String {
+        String(
+            format: NSLocalizedString("camera.stage.pitch_value %@", comment: ""),
+            viewModel.pitchText
+        )
+    }
+
+    private func pillLabel(title: LocalizedStringKey, tint: Color) -> some View {
+        Text(title)
+            .font(.caption.bold())
+            .foregroundStyle(.white)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(tint, in: Capsule())
+    }
+
+    private func statChip(text: String) -> some View {
+        Text(text)
+            .font(.caption.bold())
+            .foregroundStyle(.white)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(.white.opacity(0.1), in: Capsule())
+    }
+
+    private func playHaptic(for state: AutoCaptureState) {
+        switch state {
+        case .ready:
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        case .perfect:
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        case .countdown:
+            UISelectionFeedbackGenerator().selectionChanged()
+        default:
+            break
         }
     }
 

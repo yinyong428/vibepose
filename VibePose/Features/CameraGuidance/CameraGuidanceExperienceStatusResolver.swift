@@ -9,6 +9,14 @@ enum CameraGuidanceExperienceAction: Equatable {
     case openSettings
 }
 
+enum CameraGuidanceStageTone: Equatable {
+    case neutral
+    case progress
+    case primed
+    case success
+    case warning
+}
+
 enum CameraGuidanceImportState: Equatable {
     case idle
     case importing
@@ -24,7 +32,103 @@ struct CameraGuidanceExperienceStatus: Equatable {
     let actionKey: String?
 }
 
+struct CameraGuidanceStagePresentation: Equatable {
+    let titleKey: String
+    let progress: Double
+    let tone: CameraGuidanceStageTone
+    let emphasisText: String?
+    let emphasisCaptionKey: String?
+}
+
 enum CameraGuidanceExperienceStatusResolver {
+    static func stagePresentation(
+        autoCaptureState: AutoCaptureState,
+        score: PoseScore
+    ) -> CameraGuidanceStagePresentation {
+        switch autoCaptureState {
+        case .idle:
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.stage.idle_title",
+                progress: 0.08,
+                tone: .neutral,
+                emphasisText: nil,
+                emphasisCaptionKey: nil
+            )
+        case .stabilizing:
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.stabilizing_title",
+                progress: 0.15,
+                tone: .neutral,
+                emphasisText: nil,
+                emphasisCaptionKey: nil
+            )
+        case .lowLight:
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.low_light_title",
+                progress: 0.08,
+                tone: .warning,
+                emphasisText: nil,
+                emphasisCaptionKey: nil
+            )
+        case .noPerson:
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.no_person_title",
+                progress: 0.08,
+                tone: .warning,
+                emphasisText: nil,
+                emphasisCaptionKey: nil
+            )
+        case .partialSubject:
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.partial_subject_title",
+                progress: 0.08,
+                tone: .warning,
+                emphasisText: nil,
+                emphasisCaptionKey: nil
+            )
+        case .multiPersonUnsupported:
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.multi_person_title",
+                progress: 0.08,
+                tone: .warning,
+                emphasisText: nil,
+                emphasisCaptionKey: nil
+            )
+        case .aligning(let value):
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.stage.aligning_title",
+                progress: normalizedProgress(value),
+                tone: .progress,
+                emphasisText: scoreText(for: value),
+                emphasisCaptionKey: "camera.stage.match_label"
+            )
+        case .ready(let value):
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.stage.ready_title",
+                progress: normalizedProgress(value),
+                tone: .primed,
+                emphasisText: scoreText(for: value),
+                emphasisCaptionKey: "camera.stage.match_label"
+            )
+        case .perfect(let value):
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.stage.perfect_title",
+                progress: normalizedProgress(value),
+                tone: .success,
+                emphasisText: scoreText(for: value),
+                emphasisCaptionKey: "camera.stage.match_label"
+            )
+        case .countdown(let seconds):
+            return CameraGuidanceStagePresentation(
+                titleKey: "camera.stage.countdown_title",
+                progress: 1.0,
+                tone: .success,
+                emphasisText: "\(seconds)",
+                emphasisCaptionKey: "camera.stage.seconds_label"
+            )
+        }
+    }
+
     static func resolve(
         cameraAuthorized: Bool,
         templates: [PoseTemplate],
@@ -132,5 +236,13 @@ enum CameraGuidanceExperienceStatusResolver {
             action: nil,
             actionKey: nil
         )
+    }
+
+    private static func normalizedProgress(_ value: Double) -> Double {
+        min(max(value, 0.08), 1.0)
+    }
+
+    private static func scoreText(for value: Double) -> String {
+        "\(Int((min(max(value, 0), 1)) * 100))"
     }
 }

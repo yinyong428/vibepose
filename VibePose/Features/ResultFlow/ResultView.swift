@@ -15,18 +15,31 @@ struct ResultView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    imageCard
-                    summaryCard
-                    #if DEBUG
-                    if showsDebugMeta {
-                        debugMetadataCard
+            ZStack {
+                LinearGradient(
+                    colors: [
+                        Color.black,
+                        heroTint.opacity(0.28),
+                        Color.black
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        imageCard
+                        summaryCard
+                        #if DEBUG
+                        if showsDebugMeta {
+                            debugMetadataCard
+                        }
+                        #endif
+                        actions
                     }
-                    #endif
-                    actions
+                    .padding()
                 }
-                .padding()
             }
             .navigationTitle("result.title")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,34 +66,73 @@ struct ResultView: View {
     }
 
     private var imageCard: some View {
-        VStack(spacing: 0) {
+        ZStack(alignment: .topLeading) {
             Image(uiImage: result.image)
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                .overlay(alignment: .bottomLeading) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(heroHeadline)
+                            .font(.title2.weight(.bold))
+                            .foregroundStyle(.white)
+                        Text(heroMessage)
+                            .font(.subheadline)
+                            .foregroundStyle(.white.opacity(0.82))
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        LinearGradient(
+                            colors: [.black.opacity(0.72), .clear],
+                            startPoint: .bottom,
+                            endPoint: .top
+                        ),
+                        in: RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    )
+                }
+                .shadow(color: heroTint.opacity(0.35), radius: 18, y: 10)
+
+            VStack(alignment: .leading, spacing: 8) {
+                badge(title: result.trigger == .automatic ? "result.trigger_auto" : "result.trigger_manual", tint: heroTint)
+                badge(
+                    title: result.representation == .stillPhoto ? "result.representation_photo" : "result.representation_fallback",
+                    tint: result.representation == .stillPhoto ? .mint : .orange
+                )
+            }
+            .padding(16)
         }
     }
 
     private var summaryCard: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 14) {
             Text(LocalizedStringKey(result.templateDisplayNameKey))
                 .font(.title3.bold())
-            Text("result.score_label \(Int(result.score * 100))")
-                .font(.headline)
-            Text(result.trigger == .automatic ? "result.trigger_auto" : "result.trigger_manual")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            Text(result.representation == .stillPhoto ? "result.representation_photo" : "result.representation_fallback")
-                .font(.subheadline)
-                .foregroundStyle(result.representation == .stillPhoto ? .green : .orange)
+                .foregroundStyle(.white)
+
+            HStack(spacing: 12) {
+                summaryMetric(
+                    title: "result.metric_score",
+                    value: "\(Int(result.score * 100))"
+                )
+                summaryMetric(
+                    title: "result.metric_source",
+                    value: result.representation == .stillPhoto ? NSLocalizedString("result.metric_source_photo", comment: "") : NSLocalizedString("result.metric_source_fallback", comment: "")
+                )
+            }
+
             Text("result.note")
                 .font(.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.white.opacity(0.72))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 20))
+        .background(.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(.white.opacity(0.08), lineWidth: 1)
+        )
     }
 
     #if DEBUG
@@ -120,6 +172,7 @@ struct ResultView: View {
             }
             .buttonStyle(.borderedProminent)
             .disabled(isSaving || didSave)
+            .tint(heroTint)
 
             Button {
                 showsShareSheet = true
@@ -137,5 +190,52 @@ struct ResultView: View {
             }
             .buttonStyle(.bordered)
         }
+    }
+
+    private var heroHeadline: LocalizedStringKey {
+        if result.score >= 0.92 {
+            return "result.hero_perfect"
+        }
+        if result.score >= 0.78 {
+            return "result.hero_strong"
+        }
+        return "result.hero_keep_building"
+    }
+
+    private var heroMessage: LocalizedStringKey {
+        result.trigger == .automatic ? "result.hero_auto_message" : "result.hero_manual_message"
+    }
+
+    private var heroTint: Color {
+        if result.score >= 0.92 {
+            return .mint
+        }
+        if result.score >= 0.78 {
+            return .yellow
+        }
+        return .orange
+    }
+
+    private func badge(title: LocalizedStringKey, tint: Color) -> some View {
+        Text(title)
+            .font(.caption.bold())
+            .foregroundStyle(.white)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(tint.opacity(0.88), in: Capsule())
+    }
+
+    private func summaryMetric(title: LocalizedStringKey, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.caption)
+                .foregroundStyle(.white.opacity(0.65))
+            Text(value)
+                .font(.headline.weight(.semibold))
+                .foregroundStyle(.white)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
