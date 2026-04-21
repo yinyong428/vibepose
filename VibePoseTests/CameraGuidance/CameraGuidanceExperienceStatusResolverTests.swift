@@ -28,7 +28,8 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
             cameraAuthorized: true,
             templates: [],
             selectedTemplate: nil,
-            autoCaptureState: .idle
+            autoCaptureState: .idle,
+            importState: .idle
         )
 
         XCTAssertEqual(
@@ -51,7 +52,8 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
             cameraAuthorized: true,
             templates: templates,
             selectedTemplate: nil,
-            autoCaptureState: .idle
+            autoCaptureState: .idle,
+            importState: .idle
         )
 
         XCTAssertEqual(
@@ -61,6 +63,30 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
                 titleKey: "camera.select_template_title",
                 messageKey: "camera.select_template_message",
                 tone: .info,
+                action: nil,
+                actionKey: nil
+            )
+        )
+    }
+
+    func testReturnsImportFailedStatusWhenCopyPoseImportFails() {
+        let selected = makeTemplate(id: "selected")
+
+        let status = CameraGuidanceExperienceStatusResolver.resolve(
+            cameraAuthorized: true,
+            templates: [selected],
+            selectedTemplate: selected,
+            autoCaptureState: .idle,
+            importState: .failed
+        )
+
+        XCTAssertEqual(
+            status,
+            CameraGuidanceExperienceStatus(
+                symbolName: "photo.badge.exclamationmark",
+                titleKey: "camera.import_failed_title",
+                messageKey: "camera.import_failed_message",
+                tone: .warning,
                 action: nil,
                 actionKey: nil
             )

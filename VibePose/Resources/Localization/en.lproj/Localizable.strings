@@ -3,6 +3,9 @@
 "camera.permission_open_settings" = "Open Settings";
 "camera.template_missing_title" = "No starter templates available.";
 "camera.template_missing_message" = "The local starter pack could not be loaded. Keep the Spike local-first and restore the bundled template manifest before testing capture.";
+"camera.import_failed_title" = "Pose import failed.";
+"camera.import_failed_message" = "We couldn't find a clean single-person body pose in that image. Try a brighter, full-body reference with one subject.";
+"camera.import_pose" = "Import Pose";
 "camera.select_template_title" = "Choose a pose template.";
 "camera.select_template_message" = "Pick one of the local templates below so guidance, scoring, and auto-capture know what to match.";
 "camera.stabilizing_title" = "Preview is stabilizing.";

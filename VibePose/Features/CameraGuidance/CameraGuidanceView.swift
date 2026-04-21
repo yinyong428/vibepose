@@ -1,9 +1,11 @@
+import PhotosUI
 import SwiftUI
 import UIKit
 
 struct CameraGuidanceView: View {
     @StateObject var viewModel: CameraGuidanceViewModel
     @Environment(\.openURL) private var openURL
+    @State private var importPhotoItem: PhotosPickerItem?
     #if DEBUG
     @State private var showsDebugPanel = false
     #endif
@@ -81,6 +83,13 @@ struct CameraGuidanceView: View {
                 dismissButton: .default(Text("result.dismiss"))
             )
         }
+        .task(id: importPhotoItem) {
+            guard let importPhotoItem,
+                  let data = try? await importPhotoItem.loadTransferable(type: Data.self) else {
+                return
+            }
+            await viewModel.importPoseImage(data: data)
+        }
         .onAppear { viewModel.onAppear() }
         .onDisappear { viewModel.onDisappear() }
     }
@@ -125,7 +134,8 @@ struct CameraGuidanceView: View {
             cameraAuthorized: viewModel.cameraAuthorized,
             templates: viewModel.templates,
             selectedTemplate: viewModel.selectedTemplate,
-            autoCaptureState: viewModel.autoCaptureState
+            autoCaptureState: viewModel.autoCaptureState,
+            importState: viewModel.importState
         )
     }
 
@@ -188,6 +198,7 @@ struct CameraGuidanceView: View {
                 Text("coverage: \(String(format: "%.2f", viewModel.detectedPose?.coverage ?? 0))")
                 Text("brightness: \(viewModel.sceneBrightness.map { String(format: "%.2f", $0) } ?? "n/a")")
                 Text("state: \(debugAutoState)")
+                Text("import: \(debugImportState)")
                 Text("capture result: \(viewModel.captureResult?.representation.rawValue ?? "none")")
             }
             .font(.caption.monospaced())
@@ -222,6 +233,17 @@ struct CameraGuidanceView: View {
             return "perfect"
         case .countdown(let seconds):
             return "countdown(\(seconds))"
+        }
+    }
+
+    private var debugImportState: String {
+        switch viewModel.importState {
+        case .idle:
+            return "idle"
+        case .importing:
+            return "importing"
+        case .failed:
+            return "failed"
         }
     }
     #endif
@@ -296,6 +318,16 @@ struct CameraGuidanceView: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: 220, alignment: .leading)
+                if viewModel.featureFlags.copyPoseEnabled {
+                    PhotosPicker(
+                        selection: $importPhotoItem,
+                        matching: .images
+                    ) {
+                        Label("camera.import_pose", systemImage: "photo.on.rectangle.angled")
+                            .font(.caption.bold())
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
 
             Spacer()

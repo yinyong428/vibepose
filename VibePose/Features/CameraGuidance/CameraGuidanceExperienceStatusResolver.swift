@@ -9,6 +9,12 @@ enum CameraGuidanceExperienceAction: Equatable {
     case openSettings
 }
 
+enum CameraGuidanceImportState: Equatable {
+    case idle
+    case importing
+    case failed
+}
+
 struct CameraGuidanceExperienceStatus: Equatable {
     let symbolName: String
     let titleKey: String
@@ -23,7 +29,8 @@ enum CameraGuidanceExperienceStatusResolver {
         cameraAuthorized: Bool,
         templates: [PoseTemplate],
         selectedTemplate: PoseTemplate?,
-        autoCaptureState: AutoCaptureState
+        autoCaptureState: AutoCaptureState,
+        importState: CameraGuidanceImportState = .idle
     ) -> CameraGuidanceExperienceStatus? {
         if !cameraAuthorized {
             return CameraGuidanceExperienceStatus(
@@ -41,6 +48,17 @@ enum CameraGuidanceExperienceStatusResolver {
                 symbolName: "square.stack.3d.up.slash",
                 titleKey: "camera.template_missing_title",
                 messageKey: "camera.template_missing_message",
+                tone: .warning,
+                action: nil,
+                actionKey: nil
+            )
+        }
+
+        if importState == .failed {
+            return CameraGuidanceExperienceStatus(
+                symbolName: "photo.badge.exclamationmark",
+                titleKey: "camera.import_failed_title",
+                messageKey: "camera.import_failed_message",
                 tone: .warning,
                 action: nil,
                 actionKey: nil

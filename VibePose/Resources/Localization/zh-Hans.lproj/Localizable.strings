@@ -3,6 +3,9 @@
 "camera.permission_open_settings" = "打开设置";
 "camera.template_missing_title" = "本地模板尚未加载。";
 "camera.template_missing_message" = "Starter pack 没有成功读入。请先恢复随包模板清单，再继续验证本地优先的拍摄链路。";
+"camera.import_failed_title" = "姿势导入失败。";
+"camera.import_failed_message" = "这张图里没有识别到清晰的单人体骨架。请换一张更亮、全身且只有一个主体的参考图。";
+"camera.import_pose" = "导入姿势";
 "camera.select_template_title" = "先选择一个姿势模板。";
 "camera.select_template_message" = "从下方本地模板里选一个，实时引导、评分和自动快门才知道该跟拍什么姿势。";
 "camera.stabilizing_title" = "预览正在稳定。";

@@ -1,4 +1,5 @@
 import CoreMedia
+import UIKit
 import Vision
 
 enum CameraGuidanceSubjectStatus: Equatable {
@@ -21,6 +22,33 @@ actor VisionPoseDetector {
         }
 
         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up)
+
+        do {
+            try handler.perform([request])
+            let observations = request.results ?? []
+            let subjectStatus = Self.subjectStatus(forObservationCount: observations.count)
+            guard subjectStatus == .clear, let observation = observations.first else {
+                return VisionPoseDetection(pose: nil, subjectStatus: subjectStatus)
+            }
+
+            let recognizedPoints = try observation.recognizedPoints(.all)
+            let pose = Self.map(points: recognizedPoints, mirrored: mirrored)
+            return VisionPoseDetection(
+                pose: pose,
+                subjectStatus: pose == nil ? .noPerson : .clear
+            )
+        } catch {
+            return VisionPoseDetection(pose: nil, subjectStatus: .noPerson)
+        }
+    }
+
+    func detectPose(in imageData: Data, mirrored: Bool) async -> VisionPoseDetection {
+        guard let image = UIImage(data: imageData)?.normalizedForVision(),
+              let cgImage = image.cgImage else {
+            return VisionPoseDetection(pose: nil, subjectStatus: .noPerson)
+        }
+
+        let handler = VNImageRequestHandler(cgImage: cgImage, orientation: .up)
 
         do {
             try handler.perform([request])
@@ -112,5 +140,19 @@ actor VisionPoseDetector {
             source: .vision,
             mirrorMode: mirrored ? .force : .none
         )
+    }
+}
+
+private extension UIImage {
+    func normalizedForVision() -> UIImage {
+        guard imageOrientation != .up else { return self }
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = scale
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+
+        return renderer.image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
     }
 }

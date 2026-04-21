@@ -34,6 +34,24 @@ struct CameraGuidanceTemplateStateResolver {
         )
     }
 
+    func importingPose(
+        _ importedPose: CanonicalPose19,
+        templates: [PoseTemplate]
+    ) -> CameraGuidanceTemplateState {
+        let selectedTemplate = recommendationService.recommend(
+            currentPose: importedPose,
+            selectedTemplate: nil,
+            templates: templates,
+            limit: 1
+        ).first ?? templates.first
+
+        return makeState(
+            templates: templates,
+            selectedTemplate: selectedTemplate,
+            currentPose: importedPose
+        )
+    }
+
     private func makeState(
         templates: [PoseTemplate],
         selectedTemplate: PoseTemplate?,

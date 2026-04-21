@@ -57,6 +57,18 @@ final class CameraGuidanceTemplateStateResolverTests: XCTestCase {
         XCTAssertEqual(state.recommendations.map(\.id), ["close", "far"])
     }
 
+    func testImportingPoseSelectsClosestTemplateAndBuildsAlternatives() {
+        let resolver = CameraGuidanceTemplateStateResolver(recommendationService: RecommendationService())
+        let close = makeTemplate(id: "close", difficulty: .easy, status: .released, offset: 0.01)
+        let medium = makeTemplate(id: "medium", difficulty: .medium, status: .released, offset: 0.12)
+        let far = makeTemplate(id: "far", difficulty: .hard, status: .released, offset: 0.3)
+
+        let state = resolver.importingPose(close.pose, templates: [far, medium, close])
+
+        XCTAssertEqual(state.selectedTemplate?.id, "close")
+        XCTAssertEqual(state.recommendations.map(\.id), ["medium", "far"])
+    }
+
     private func makeTemplate(
         id: String,
         difficulty: PoseDifficulty,

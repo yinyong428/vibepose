@@ -25,6 +25,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     @Published var captureResult: CaptureResult?
     @Published var alert: CameraGuidanceAlert?
     @Published var sceneBrightness: Double?
+    @Published var importState: CameraGuidanceImportState = .idle
 
     let cameraController: CameraSessionController
 
@@ -56,6 +57,7 @@ final class CameraGuidanceViewModel: ObservableObject {
     }
 
     func selectTemplate(_ template: PoseTemplate) {
+        importState = .idle
         let state = container.cameraGuidanceTemplateStateResolver.selecting(
             template,
             templates: templates,
@@ -73,6 +75,25 @@ final class CameraGuidanceViewModel: ObservableObject {
         Task {
             await captureStillPhoto(trigger: .manual)
         }
+    }
+
+    func importPoseImage(data: Data) async {
+        guard featureFlags.copyPoseEnabled else { return }
+        importState = .importing
+
+        let detection = await container.visionPoseDetector.detectPose(in: data, mirrored: false)
+        guard detection.subjectStatus == .clear, let pose = detection.pose else {
+            importState = .failed
+            return
+        }
+
+        importState = .idle
+        applyTemplateState(
+            container.cameraGuidanceTemplateStateResolver.importingPose(
+                pose,
+                templates: templates
+            )
+        )
     }
 
     func dismissResult() {
