@@ -2,6 +2,7 @@ import Foundation
 
 enum AutoCaptureState: Equatable {
     case idle
+    case stabilizing
     case lowLight
     case noPerson
     case partialSubject

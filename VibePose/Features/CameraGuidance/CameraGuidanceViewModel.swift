@@ -30,6 +30,8 @@ final class CameraGuidanceViewModel: ObservableObject {
 
     private let container: DependencyContainer
     private var captureInFlight = false
+    private let previewWarmupDuration: TimeInterval = 1.0
+    private var previewStableAfter: TimeInterval?
 
     init(container: DependencyContainer) {
         self.container = container
@@ -42,6 +44,9 @@ final class CameraGuidanceViewModel: ObservableObject {
         Task {
             cameraAuthorized = await container.cameraGuidanceLifecycleCoordinator.start { [weak self] formattedPitch in
                 self?.pitchText = formattedPitch
+            }
+            if cameraAuthorized {
+                markPreviewWarmup()
             }
         }
     }
@@ -61,6 +66,7 @@ final class CameraGuidanceViewModel: ObservableObject {
 
     func toggleCamera() {
         cameraController.toggleCamera()
+        markPreviewWarmup()
     }
 
     func captureManual() {
@@ -119,6 +125,7 @@ final class CameraGuidanceViewModel: ObservableObject {
             currentPose: detection.pose,
             subjectStatus: detection.subjectStatus,
             environmentBrightness: sceneBrightness,
+            isPreviewStable: isPreviewStable(at: ProcessInfo.processInfo.systemUptime),
             selectedTemplate: selectedTemplate,
             templates: templates,
             autoCaptureEnabled: featureFlags.autoCaptureEnabled,
@@ -167,6 +174,21 @@ final class CameraGuidanceViewModel: ObservableObject {
         templates = state.templates
         selectedTemplate = state.selectedTemplate
         recommendations = state.recommendations
+    }
+
+    private func markPreviewWarmup() {
+        previewStableAfter = ProcessInfo.processInfo.systemUptime + previewWarmupDuration
+        autoCaptureState = .stabilizing
+        coachCopy = "coach.stabilizing"
+    }
+
+    private func isPreviewStable(at timestamp: TimeInterval) -> Bool {
+        guard let previewStableAfter else { return true }
+        if timestamp >= previewStableAfter {
+            self.previewStableAfter = nil
+            return true
+        }
+        return false
     }
 
     static func extractBrightness(from sampleBuffer: CMSampleBuffer) -> Double? {

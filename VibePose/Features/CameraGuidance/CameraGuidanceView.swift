@@ -204,6 +204,8 @@ struct CameraGuidanceView: View {
         switch viewModel.autoCaptureState {
         case .idle:
             return "idle"
+        case .stabilizing:
+            return "stabilizing"
         case .lowLight:
             return "lowLight"
         case .noPerson:
@@ -249,6 +251,7 @@ struct CameraGuidanceView: View {
         let text: String = {
             switch viewModel.autoCaptureState {
             case .idle: return "Idle"
+            case .stabilizing: return "Stabilizing"
             case .lowLight: return "Low Light"
             case .noPerson: return "No Person"
             case .partialSubject: return "Partial Subject"

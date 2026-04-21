@@ -4,6 +4,7 @@ import XCTest
 final class AutoCaptureCoachCopyResolverTests: XCTestCase {
     func testResolvesStaticStatesToExpectedKeys() {
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.idle), "coach.idle")
+        XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.stabilizing), "coach.stabilizing")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.lowLight), "coach.low_light")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.noPerson), "coach.no_person")
         XCTAssertEqual(AutoCaptureCoachCopyResolver.resolve(.partialSubject), "coach.partial_subject")

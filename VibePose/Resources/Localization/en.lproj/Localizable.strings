@@ -5,6 +5,8 @@
 "camera.template_missing_message" = "The local starter pack could not be loaded. Keep the Spike local-first and restore the bundled template manifest before testing capture.";
 "camera.select_template_title" = "Choose a pose template.";
 "camera.select_template_message" = "Pick one of the local templates below so guidance, scoring, and auto-capture know what to match.";
+"camera.stabilizing_title" = "Preview is stabilizing.";
+"camera.stabilizing_message" = "Hold for a moment after opening the camera or switching lenses. We temporarily pause matching until the preview settles.";
 "camera.low_light_title" = "More light needed.";
 "camera.low_light_message" = "The preview looks too dark for stable body-pose detection. Move to brighter light before trusting alignment or auto-capture.";
 "camera.no_person_title" = "Step back into frame.";
@@ -25,6 +27,7 @@
 "settings.copy_pose" = "Copy Pose Beta";
 "settings.runtime" = "Runtime";
 "coach.idle" = "Pick a template and step into frame.";
+"coach.stabilizing" = "Hold on while the preview stabilizes.";
 "coach.low_light" = "The scene is too dark right now. Find brighter light before matching.";
 "coach.no_person" = "No subject detected. Step into the center of the frame.";
 "coach.partial_subject" = "We need more of the body in frame before matching can stabilize.";

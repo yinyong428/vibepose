@@ -58,6 +58,17 @@ enum CameraGuidanceExperienceStatusResolver {
             )
         }
 
+        if autoCaptureState == .stabilizing {
+            return CameraGuidanceExperienceStatus(
+                symbolName: "camera.aperture",
+                titleKey: "camera.stabilizing_title",
+                messageKey: "camera.stabilizing_message",
+                tone: .info,
+                action: nil,
+                actionKey: nil
+            )
+        }
+
         if autoCaptureState == .multiPersonUnsupported {
             return CameraGuidanceExperienceStatus(
                 symbolName: "person.2.crop.square.stack",

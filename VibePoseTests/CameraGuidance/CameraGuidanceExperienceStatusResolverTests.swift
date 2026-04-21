@@ -67,6 +67,29 @@ final class CameraGuidanceExperienceStatusResolverTests: XCTestCase {
         )
     }
 
+    func testReturnsStabilizingStatusWhenPreviewIsWarmingUp() {
+        let selected = makeTemplate(id: "selected")
+
+        let status = CameraGuidanceExperienceStatusResolver.resolve(
+            cameraAuthorized: true,
+            templates: [selected],
+            selectedTemplate: selected,
+            autoCaptureState: .stabilizing
+        )
+
+        XCTAssertEqual(
+            status,
+            CameraGuidanceExperienceStatus(
+                symbolName: "camera.aperture",
+                titleKey: "camera.stabilizing_title",
+                messageKey: "camera.stabilizing_message",
+                tone: .info,
+                action: nil,
+                actionKey: nil
+            )
+        )
+    }
+
     func testReturnsNoPersonStatusWhenSubjectLeavesFrame() {
         let selected = makeTemplate(id: "selected")
 

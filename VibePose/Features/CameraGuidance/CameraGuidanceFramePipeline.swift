@@ -28,11 +28,27 @@ actor CameraGuidanceFramePipeline {
         currentPose: CanonicalPose19?,
         subjectStatus: CameraGuidanceSubjectStatus,
         environmentBrightness: Double? = nil,
+        isPreviewStable: Bool = true,
         selectedTemplate: PoseTemplate?,
         templates: [PoseTemplate],
         autoCaptureEnabled: Bool,
         timestamp: TimeInterval
     ) async -> CameraGuidanceFrameEvaluation {
+        if !isPreviewStable {
+            await autoCaptureCoordinator.reset()
+            let decision = AutoCaptureDecision(state: .stabilizing, shouldTriggerCapture: false)
+            return CameraGuidanceFrameEvaluation(
+                score: PoseScore(value: 0, matchedJoints: 0, coverage: currentPose?.coverage ?? 0),
+                recommendations: recommendationService.recommend(
+                    currentPose: nil,
+                    selectedTemplate: selectedTemplate,
+                    templates: templates
+                ),
+                decision: decision,
+                coachCopy: AutoCaptureCoachCopyResolver.resolve(decision.state)
+            )
+        }
+
         if subjectStatus == .multiPersonUnsupported {
             await autoCaptureCoordinator.reset()
             let decision = AutoCaptureDecision(state: .multiPersonUnsupported, shouldTriggerCapture: false)

@@ -5,6 +5,8 @@
 "camera.template_missing_message" = "Starter pack 没有成功读入。请先恢复随包模板清单，再继续验证本地优先的拍摄链路。";
 "camera.select_template_title" = "先选择一个姿势模板。";
 "camera.select_template_message" = "从下方本地模板里选一个，实时引导、评分和自动快门才知道该跟拍什么姿势。";
+"camera.stabilizing_title" = "预览正在稳定。";
+"camera.stabilizing_message" = "刚打开相机或切换镜头时请稍等片刻。预览稳定前，我们会暂时暂停姿势匹配。";
 "camera.low_light_title" = "当前光线还不够。";
 "camera.low_light_message" = "预览画面太暗，人体骨架识别很难稳定工作。请先移动到更亮的环境，再继续依赖对齐和自动快门。";
 "camera.no_person_title" = "请重新回到画面里。";
@@ -25,6 +27,7 @@
 "settings.copy_pose" = "抄作业 Beta";
 "settings.runtime" = "运行基线";
 "coach.idle" = "先选一个模板，再走进取景框。";
+"coach.stabilizing" = "稍等一下，预览正在稳定。";
 "coach.low_light" = "现在环境太暗了，先找更亮的光线再继续匹配。";
 "coach.no_person" = "未识别到主体，请站到画面中间。";
 "coach.partial_subject" = "需要看到更多身体区域，匹配才能稳定。";
